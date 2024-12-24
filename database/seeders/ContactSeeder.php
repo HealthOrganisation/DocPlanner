@@ -1,0 +1,25 @@
+<?php
+
+namespace Database\Seeders;
+use App\Models\Contact;
+
+use Illuminate\Database\Seeder;
+
+class ContactSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Contact::create([
+           
+            'id_doctor' => 1,
+            'id_patient' => 2,
+            'description' =>'salam',
+            'date_sent' => '2024-01-01',
+            ]);
+    }
+}
