@@ -75,10 +75,10 @@ public function index(){
             $user = Auth::user(); // permet de récupérer les informations de l'utilisateur authentifié
 
             if($user->role === 'doctor'){
-                return response()->json(['redirect'=> '/profil_doctor', 'user' =>$user], 200);
+                return response()->json(['redirect'=> '/profildoctor', 'user' =>$user], 200);
             if($user->role === 'patient')
             {
-                return response()->json(['redirect'=> '/profil_patient', 'user' => $user], 200);
+                return response()->json(['redirect'=> '/profilpatient', 'user' => $user], 200);
             }
         
             return response()->json(['message' => 'Identifiants invalides'], 401);
