@@ -2,14 +2,14 @@
   <nav class="navbar">
     <div class="logo">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-image" />
-      <span class="logo-text">MyHealth</span> <!-- Added logo text -->
+      <span class="logo-textt">MyHealth</span> <!-- Added logo text -->
     </div>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Articles</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="/contactus">Contact</a></li>
+      <li><a href="/articles">Articles</a></li>
+      <li><a href="/login">Login</a></li>
     </ul>
   </nav>
 </header>
@@ -68,7 +68,7 @@ header.scrolled {
   object-fit: cover;
 }
 
-.logo-text {
+.logo-textt {
   font-size: 1.5rem; /* Adjust font size for logo text */
   font-weight: bold;
   color: #333;
