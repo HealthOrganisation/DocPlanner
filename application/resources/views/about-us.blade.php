@@ -6,6 +6,10 @@
     <title>À propos de nous</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+    <header>
+    @include('header')
+    </header>
+
     <style>
         body {
             font-family: 'Raleway', sans-serif;
@@ -112,10 +116,10 @@
     </style>
 </head>
 <body>
-    <header class="about-header">
+    <div class="about-header">
         <h1>Gestion Innovante des Rendez-vous Médicaux</h1>
         <p class="mission">Notre mission est de révolutionner la prise de rendez-vous pour les patients, en facilitant l'accès aux soins de santé, tout en garantissant une expérience fluide, rapide et sécurisée.</p>
-    </header>
+    </div>
     <main class="about-container">
         <div class="team-card">
             <div class="icon"><i class="fas fa-calendar-alt"></i></div>
