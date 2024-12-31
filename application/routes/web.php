@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', function () {
+    return view('Pages.authentification.Login');
+});
+Route::get('/signup', function () {
+    return view('Pages.authentification.Signup');
+});
+Route::get('/forgotpassword', function () {
+    return view('Pages.authentification.ForgotPassword');
+});
+
