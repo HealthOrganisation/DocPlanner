@@ -6,7 +6,7 @@
     </div>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="/about-us">About</a></li>
       <li><a href="/contactus">Contact</a></li>
       <li><a href="/articles">Articles</a></li>
       <li><a href="/login">Login</a></li>
