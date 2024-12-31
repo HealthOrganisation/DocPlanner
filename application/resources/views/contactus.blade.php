@@ -185,19 +185,28 @@
             <div class="inner-container">
                 <br>
                 <div class="tile1">
-                    <div class="tile1-heading">Get in touch</div>
                     <div class="form-row">We are here for you! How can we help?</div>
-                    <form id="contact-form" class="form-horizontal" role="form" method="POST" >
+                    <form id="contact-form" class="form-horizontal" role="form" method="POST" action="{{ route('contactus.store') }}">
                         @csrf
                         <div class="form-row">
-                            <input type="text" name="name" class="form-field" placeholder="Enter your name">
+                            <input type="text" name="name" class="form-field" placeholder="Enter your name" value="{{ old('name') }}">
+                            @error('name')
+                                <div class="error" style="color:red;">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-row">
-                            <input type="text" name="email" class="form-field" placeholder="Enter your email address">
+                            <input type="text" name="email" class="form-field" placeholder="Enter your email address" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="error" style="color:red;">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-row">
-                            <textarea name="message" class="form-field" placeholder="Go ahead we are listening..."></textarea>
+                            <textarea name="message" class="form-field" placeholder="Go ahead we are listening...">{{ old('message') }}</textarea>
+                            @error('message')
+                                <div class="error" style="color:red;">{{ $message }}</div>
+                            @enderror
                         </div>
+                        
                         <div class="form-row">
                             <input type="submit" class="form-field btn" value="Submit">
                         </div>
