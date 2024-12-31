@@ -1202,3 +1202,25 @@
 2024/12/30 17:50:55 [notice] 1#1: worker process 35 exited with code 0
 2024/12/30 17:50:55 [notice] 1#1: worker process 36 exited with code 0
 2024/12/30 17:50:55 [notice] 1#1: exit
+2024/12/30 19:01:41 [notice] 1#1: using the "epoll" event method
+2024/12/30 19:01:41 [notice] 1#1: nginx/1.27.3
+2024/12/30 19:01:41 [notice] 1#1: built by gcc 13.2.1 20240309 (Alpine 13.2.1_git20240309) 
+2024/12/30 19:01:41 [notice] 1#1: OS: Linux 5.15.146.1-microsoft-standard-WSL2
+2024/12/30 19:01:41 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2024/12/30 19:01:41 [notice] 1#1: start worker processes
+2024/12/30 19:01:41 [notice] 1#1: start worker process 70
+2024/12/30 19:01:41 [notice] 1#1: start worker process 72
+2024/12/30 19:01:41 [notice] 1#1: start worker process 74
+2024/12/30 19:01:41 [notice] 1#1: start worker process 76
+2024/12/30 19:01:41 [notice] 1#1: start worker process 78
+2024/12/30 19:01:41 [notice] 1#1: start worker process 80
+2024/12/30 19:01:41 [notice] 1#1: start worker process 82
+2024/12/30 19:01:41 [notice] 1#1: start worker process 83
+2024/12/30 19:01:41 [emerg] 70#70: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 72#72: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 74#74: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 78#78: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 76#76: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 80#80: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 83#83: io_setup() failed (38: Function not implemented)
+2024/12/30 19:01:41 [emerg] 82#82: io_setup() failed (38: Function not implemented)
