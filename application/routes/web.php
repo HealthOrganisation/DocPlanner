@@ -22,6 +22,10 @@ Route::get('/signup', function () {
 Route::get('/forgotpassword', function () {
     return view('Pages.authentification.ForgotPassword');
 });
+Route::get('/Doctor', function () {
+    return view('Pages.DoctorProfile');
+});
+
 
 
 Route::get('/', [HomeController::class, 'index']);

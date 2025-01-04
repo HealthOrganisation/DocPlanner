@@ -129,19 +129,35 @@
       <div class="title">Signup Form</div>
       <form id="signupForm">
         <div class="field">
-          <input type="text" id="fullName" required />
+          <input 
+            type="text" 
+            id="fullName" 
+            required 
+          />
           <label for="fullName">Full Name</label>
         </div>
         <div class="field">
-          <input type="email" id="email" required />
+          <input 
+            type="email" 
+            id="email" 
+            required 
+          />
           <label for="email">Email Address</label>
         </div>
         <div class="field">
-          <input type="password" id="password" required />
+          <input 
+            type="password" 
+            id="password" 
+            required 
+          />
           <label for="password">Password</label>
         </div>
         <div class="field">
-          <input type="password" id="confirmPassword" required />
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            required 
+          />
           <label for="confirmPassword">Confirm Password</label>
         </div>
         <div class="field">
@@ -153,7 +169,6 @@
       </form>
     </div>
   </div>
-
   <script>
     document.getElementById('signupForm').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -172,7 +187,7 @@
       console.log('Email:', email);
       console.log('Password:', password);
 
-      // Ajouter ici la logique d'inscription (par exemple, appel à une API)
+      // Ajouter la logique d'inscription ici
     });
   </script>
 </body>

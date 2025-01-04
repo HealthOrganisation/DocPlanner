@@ -87,7 +87,7 @@
       transform: translateY(-50%);
     }
 
-    form .field input[type="submit"] {
+    form .field input[type='submit'] {
       color: #fff;
       border: none;
       padding-left: 0;
@@ -97,14 +97,47 @@
       cursor: pointer;
       background: linear-gradient(135deg, #1272da, #9cc1d8);
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    form .field input[type="submit"]:hover {
+    form .field input[type='submit']::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: skewX(-45deg);
+      transition: 0.5s;
+    }
+
+    form .field input[type='submit']:hover::before {
+      left: 100%;
+    }
+
+    form .field input[type='submit']:hover {
       background: linear-gradient(135deg, #2e6aaf, #4d92d6);
     }
 
-    form .field input[type="submit"]:active {
+    form .field input[type='submit']:active {
       transform: scale(0.95);
+    }
+
+    form .signup-link {
+      color: #262626;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    form .signup-link a {
+      color: #3579c3;
+      text-decoration: none;
+    }
+
+    form .signup-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -114,15 +147,27 @@
       <div class="title">Forgot Password</div>
       <form id="forgotPasswordForm">
         <div class="field">
-          <input type="email" id="email" required />
+          <input 
+            type="email" 
+            id="email" 
+            required 
+          />
           <label for="email">Email Address</label>
         </div>
         <div class="field">
-          <input type="password" id="newPassword" required />
+          <input 
+            type="password" 
+            id="newPassword" 
+            required 
+          />
           <label for="newPassword">New Password</label>
         </div>
         <div class="field">
-          <input type="password" id="confirmPassword" required />
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            required 
+          />
           <label for="confirmPassword">Confirm Password</label>
         </div>
         <div class="field">
@@ -131,7 +176,6 @@
       </form>
     </div>
   </div>
-
   <script>
     document.getElementById('forgotPasswordForm').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -146,6 +190,7 @@
       }
 
       console.log("Reset Password Request:", email, newPassword);
+
       // Ajouter ici l'appel API pour réinitialiser le mot de passe
     });
   </script>
