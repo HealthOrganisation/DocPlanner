@@ -117,39 +117,40 @@
 </head>
 <body>
     <div class="about-header">
-        <h1>Gestion Innovante des Rendez-vous Médicaux</h1>
-        <p class="mission">Notre mission est de révolutionner la prise de rendez-vous pour les patients, en facilitant l'accès aux soins de santé, tout en garantissant une expérience fluide, rapide et sécurisée.</p>
+        <h1>
+            Innovative Medical Appointment Management</h1>
+        <p class="mission">Our mission is to revolutionize appointment scheduling for patients by facilitating access to healthcare while ensuring a seamless, fast, and secure experience.</p>
     </div>
     <main class="about-container">
         <div class="team-card">
             <div class="icon"><i class="fas fa-calendar-alt"></i></div>
-            <h2>Planification Simplifiée</h2>
-            <p>Notre plateforme intuitive permet aux patients de prendre un rendez-vous en quelques clics, réduisant ainsi le temps d'attente et les démarches administratives.</p>
+            <h2>Simplified Scheduling</h2>
+            <p>Our intuitive platform allows patients to book an appointment in just a few clicks, reducing waiting time and administrative hassle.</p>
         </div>
         <div class="team-card">
             <div class="icon"><i class="fas fa-stethoscope"></i></div>
-            <h2>Connexion avec les Médecins</h2>
-            <p>Nous offrons une large sélection de médecins spécialisés, garantissant que chaque patient trouve le professionnel le mieux adapté à ses besoins.</p>
+            <h2>Connecting with Doctors</h2>
+            <p>We offer a wide selection of specialized doctors, ensuring that every patient finds the professional best suited to their needs.</p>
         </div>
         <div class="team-card">
             <div class="icon"><i class="fas fa-comments"></i></div>
-            <h2>Support Client Dédié</h2>
-            <p>Une équipe de support dédiée est à votre disposition pour répondre à toutes vos questions concernant la prise de rendez-vous.</p>
+            <h2>Dedicated Customer Support</h2>
+            <p>A dedicated support team is available to answer all your questions regarding appointment booking.</p>
         </div>
         <div class="team-card">
             <div class="icon"><i class="fas fa-lock"></i></div>
-            <h2>Sécurité des Données</h2>
-            <p>Nous garantissons la protection des données personnelles de nos patients grâce à des protocoles de sécurité avancés et conformes aux normes de confidentialité.</p>
+            <h2>Data Security</h2>
+            <p>We guarantee the protection of our patients' personal data through advanced security protocols that comply with privacy standards.</p>
         </div>
         <div class="team-card">
             <div class="icon"><i class="fas fa-clipboard-check"></i></div>
-            <h2>Suivi des Rendez-vous</h2>
-            <p>Recevez des rappels automatiques et vérifiez facilement l'historique de vos rendez-vous pour ne jamais manquer une consultation.</p>
+            <h2>Appointment Tracking</h2>
+            <p>Receive automatic reminders and easily check your appointment history to never miss a consultation.</p>
         </div>
         <div class="team-card">
             <div class="icon"><i class="fas fa-user-md"></i></div>
-            <h2>Professionnels de Santé Vérifiés</h2>
-            <p>Tous nos médecins sont soigneusement sélectionnés et vérifiés pour assurer la qualité et la fiabilité des soins dispensés.</p>
+            <h2>Verified Healthcare Professionals</h2>
+            <p>All our doctors are carefully selected and verified to ensure the quality and reliability of the care provided.</p>
         </div>
     </main>
     <script>
