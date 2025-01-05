@@ -6,6 +6,7 @@
     <title>Login Form</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
     <style>
+        /* CSS conservé sans modifications */
         * {
             margin: 0;
             padding: 0;
@@ -152,21 +153,33 @@
     </style>
 </head>
 <body>
+
+@if(session('error'))
+    <div style="color: red; text-align: center;">
+        {{ session('error') }}
+    </div>
+@endif
+
+
     <div class="login-container">
         <div class="wrapper">
             <div class="title">Login Form</div>
-            <form onsubmit="submitForm(event)">
+            <!-- Route ajoutée à l'attribut 'action' -->
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
                 <div class="field">
-                    <input type="text" id="email" required />
+                    <!-- Lier au backend avec 'name="email"' -->
+                    <input type="email" id="email" name="email" required />
                     <label for="email">Email Address</label>
                 </div>
                 <div class="field">
-                    <input type="password" id="password" required />
+                    <!-- Lier au backend avec 'name="password"' -->
+                    <input type="password" id="password" name="password" required />
                     <label for="password">Password</label>
                 </div>
                 <div class="content">
                     <div class="checkbox">
-                        <input type="checkbox" id="remember-me" />
+                        <input type="checkbox" id="remember-me" name="remember" />
                         <label for="remember-me">Remember me</label>
                     </div>
                     <div class="pass-link">
@@ -182,20 +195,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        function submitForm(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('remember-me').checked;
-
-            console.log('Email:', email);
-            console.log('Password:', password);
-            console.log('Remember Me:', rememberMe);
-
-            // Ajouter la logique d'authentification ici
-        }
-    </script>
 </body>
 </html>

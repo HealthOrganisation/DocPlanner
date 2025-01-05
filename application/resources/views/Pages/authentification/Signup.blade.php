@@ -121,17 +121,38 @@
     form .login-link a:hover {
       text-decoration: underline;
     }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
   <div class="signup-container">
     <div class="wrapper">
       <div class="title">Signup Form</div>
-      <form id="signupForm">
+
+      <!-- Affichage des erreurs -->
+      @if ($errors->any())
+        <div class="error">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
+      <form id="signupForm" method="POST" action="{{ route('user.store') }}">
+        @csrf
         <div class="field">
           <input 
             type="text" 
             id="fullName" 
+            name="name" 
+            value="{{ old('name') }}" 
             required 
           />
           <label for="fullName">Full Name</label>
@@ -140,14 +161,27 @@
           <input 
             type="email" 
             id="email" 
+            name="email" 
+            value="{{ old('email') }}" 
             required 
           />
           <label for="email">Email Address</label>
         </div>
         <div class="field">
           <input 
+            type="role" 
+            id="role" 
+            name="role" 
+            value="{{ old('role') }}" 
+            required 
+          />
+          <label for="role">Role</label>
+        </div>
+        <div class="field">
+          <input 
             type="password" 
             id="password" 
+            name="password" 
             required 
           />
           <label for="password">Password</label>
@@ -156,6 +190,7 @@
           <input 
             type="password" 
             id="confirmPassword" 
+            name="password_confirmation" 
             required 
           />
           <label for="confirmPassword">Confirm Password</label>
@@ -169,26 +204,5 @@
       </form>
     </div>
   </div>
-  <script>
-    document.getElementById('signupForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const fullName = document.getElementById('fullName').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
-
-      if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
-
-      console.log('Full Name:', fullName);
-      console.log('Email:', email);
-      console.log('Password:', password);
-
-      // Ajouter la logique d'inscription ici
-    });
-  </script>
 </body>
 </html>
