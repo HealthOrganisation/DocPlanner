@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -10,28 +13,25 @@ class UserController extends Controller
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function store(Request $request)
-    {
-        $request->validate(
-            [
-                'name' => 'required|string|max:555' ,
-                'email' => 'required|email|unique:users',
-                'password' => 'required|string|min:8',
-                'role' => 'required|string|max:555',
-            ]
-            );
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'role' => 'required|string',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
 
-        $user = User::create(
-            [
-                'name' => $request->name ,
-                'email' =>  $request->email ,
-                'password' => bcrypt( $request->password) ,
-                'role' =>  $request->role ,
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->role = $request->role;
+    $user->password = Hash::make($request->password);
+    $user->save();
 
-            ]
-            );
-         return response()->json($user,201);
-    }
+    return redirect('/login')->with('success', 'Account created successfully! Please log in.');
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -60,31 +60,42 @@ public function index(){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    public function login(Request $request)
+public function showLoginForm()
     {
-        $v = $request->validate(
-            [
-                'email'=> 'required|email',
-                'password'=> 'required',
-            ]
-            );
-        if( Auth::attempt($v)) // methode compare les informations
-        {
-            $user = Auth::user(); // permet de récupérer les informations de l'utilisateur authentifié
-
-            if($user->role === 'doctor'){
-                return response()->json(['redirect'=> '/profildoctor', 'user' =>$user], 200);
-            if($user->role === 'patient')
-            {
-                return response()->json(['redirect'=> '/profilpatient', 'user' => $user], 200);
-            }
-        
-            return response()->json(['message' => 'Identifiants invalides'], 401);
-            }
-        }    
+        return view('login');
     }
+
+    public function showRegistrationForm ()
+    { $currentIndex=0;
+        return view('HomePage');
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public function login(Request $request)
+{
+    // Validation des champs requis
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    // Récupération des identifiants
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+
+        // Redirection selon le rôle de l'utilisateur
+        if ($user->role === 'doctor') {
+            return redirect()->route('doctor.profile'); // Redirection pour les médecins
+        } elseif ($user->role === 'patient') {
+            return redirect()->route('patient.dashboard'); // Redirection pour les patients
+        }
+    }
+
+    // Si les identifiants sont incorrects
+    return back()->with('error', 'Incorrect Email Or Password');
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
