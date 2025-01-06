@@ -6,6 +6,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorController;
 
 use App\Http\Controllers\HomeController;
 
@@ -35,3 +37,11 @@ Route::get('/articles', [ArticlesController::class, 'show']);
 Route::get('/contactus', [ContactusController::class, 'show'])->name('contactus.show');
 
 Route::post('/contactus', [ContactusController::class, 'store'])->name('contactus.store');
+
+Route::post('/signup', [UserController::class, 'store'])->name('user.store');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/DoctorProfile', [DoctorController::class, 'showProfile'])->name('doctor.profile');
+});
