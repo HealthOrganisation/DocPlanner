@@ -1,249 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Internship Finder</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <header>
-    @include('header')
-    </header>
-
-    <style>
-       body {
-    font-family: Arial;
-    background-color: #a8a4a4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures body takes full viewport height */
-}
-
-
-
-.content-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding-top: 80px; /* Adjust based on header height and desired space */
-    padding-bottom: 80px; /* Adjust based on footer height and desired space */
-}
-
-.footer {
-    background-color: #303030; /* Or your desired color */
-    color: #ffffff; /* Text color */
-    padding: 20px; /* Adjust as needed */
-    box-sizing: border-box;
-    /* Optional: Add space at the top if needed */
-}
-
-.container {
-    border-radius: 16px;
-    max-width: 1180px;
-    margin: 0 30px;
-    background-color: white;
-    padding: 20px; /* Ensure padding if needed */
-    flex: 1;
-}
-
-/* Your other styles remain unchanged */
-.inner-container {
-    width: 800px;
-    margin: 0 auto;
-    display: flex;
-    background-color: white;
-    border-radius: 12px;
-    padding: 30px;
-}
-
-/* Add space between header and content, and between content and footer */
-.content-wrapper {
-    padding-top: 50px; /* Adjust this value to control the space below the header */
-    padding-bottom: 80px; /* Adjust this value to control the space above the footer */
-}
-
-
-        /* Your other styles remain unchanged */
-       
-        .tile1 {
-            width: 350px;
-        }
-
-        .tile2 {
-            flex: 1 1 auto;
-            padding: 0px 40px;
-            margin-left:2cm;
-        }
-
-        .tile1-heading {
-            background: -webkit-linear-gradient(#3579c3, #444);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
-        .form-row {
-            padding: 20px 0px 0px 0px;
-        }
-
-        .form-field {
-            border-radius: 4px;
-            width: 100%;
-            padding: 15px;
-            background-color: #f5f4fa;
-            border: 0px;
-        }
-
-        .contact-image {
-            padding: 10px;
-            border-radius: 35px;
-            border: 1px solid #a8a4a4;
-            vertical-align: middle;
-            margin-right: 20px;
-            width: 16px;
-            height: 16px;
-        }
-
-        textarea {
-            height: 100px;
-            font-family: Arial;
-        }
-
-        .btn {
-            color: white;
-            background: linear-gradient(to right, #444, #3579c3);
-        }
-
-        .tile2-image img {
-            width: 200px;
-            height: 200px;
-            margin-left:1cm;
-        }
-
-        #menu-icon {
-            display: none;
-            float: right;
-        }
-
-        @media all and (max-width: 900px) {
-            .inner-container {
-                width: auto;
-                display: block;
-                margin: 30px auto;
-            }
-            .header-content {
-                width: auto;
-            }
-            .tile1 {
-                width: 100%;
-            }
-            .tile2 {
-                padding: 0px;
-            }
-            .tile2-image img {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        @media all and (max-width: 540px) {
-            #header-right-menu {
-                float: none;
-                display: none;
-            }
-            #header-right-menu a {
-                display: block;
-                padding: 10px 0px;
-            }
-
-            #menu-icon {
-                display: block;
-                float: right;
-            }
-        }
-
-        @media all and (max-width: 400px) {
-            .container {
-                padding: 10px;
-            }
-        }
-        .form-row p{
-            margin-left:1.5cm;
-        }
-    </style>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
 
+.contact-container {
+    position: relative;
+    height: 100vh;
+}
+
+.image-section {
+    height: 100%;
+}
+
+.image-section img {
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+}
+
+.triangle-section {
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-container {
+    margin-bottom: 30px;
+    margin-left: -13cm;
+    color: rgb(0, 0, 0);
+}
+
+.title-container h1 {
+    font-size: 36px;
+    margin-top: -2px;
+}
+
+.title-container p {
+    font-size: 18px;
+}
+
+.form-container {
+    background: white;
+    padding: 30px;
+    box-shadow: 11px 31px 61px 0px rgba(158, 158, 158, 1);
+    border-radius: 30px;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    gap: 1.5cm;
+    margin-left: 6cm;
+    margin-top: 0.6cm;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 29%;
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 13px;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.input-groupe {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 50%;
+    margin-left: 6cm;
+}
+
+.input-groupe input,
+.input-groupe textarea {
+    padding: 13px;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    width: 100%;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+button {
+    width: 15%;
+    padding: 10px;
+    background-color: #3579c3;
+    color: white;
+    border: none;
+    border-radius: 17px;
+    cursor: pointer;
+    margin-left: 10cm;
+}
+
+button:hover {
+    background-color: #285a8e;
+}
+
+/* Find Us Here Section */
+.find-us-section {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 50px 20px;
+}
+
+.find-us-title {
+    font-size: 36px;
+    margin-bottom: 30px;
+    margin-right: 20cm;
+}
+
+.widgets {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.widget {
+    background-color: #e6f7ff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    text-align: center;
+}
+
+.widget-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #3579c3; /* Blue color for the icons */
+}
+
+.widget-title {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.widget-text {
+    font-size: 18px;
+    color: #555;
+}
+</style>
 <body>
-
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="inner-container">
-                <br>
-                <div class="tile1">
-                    <div class="form-row">We are here for you! How can we help?</div>
-                    <form id="contact-form" class="form-horizontal" role="form" method="POST" action="{{ route('contactus.store') }}">
-                        @csrf
-                        <div class="form-row">
-                            <input type="text" name="name" class="form-field" placeholder="Enter your name" value="{{ old('name') }}">
-                            @error('name')
-                                <div class="error" style="color:red;">{{ $message }}</div>
-                            @enderror
+    <header>
+        @include('header')
+    </header>
+    <div class="contact-container">
+        <div class="image-section">
+            <img src="images/cont.jpg" alt="Contact Image">
+        </div>
+        <div class="triangle-section">
+            <div class="title-container">
+                <h1>Contact Us</h1>
+                <p>Kindly reach us to get the fastest response and treatment</p>
+            </div>
+            <div class="form-container">
+                <form action="/submit-contact" method="POST">
+                    <div class="row">
+                        <div class="input-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
-                        <div class="form-row">
-                            <input type="text" name="email" class="form-field" placeholder="Enter your email address" value="{{ old('email') }}">
-                            @error('email')
-                                <div class="error" style="color:red;">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-row">
-                            <textarea name="message" class="form-field" placeholder="Go ahead we are listening...">{{ old('message') }}</textarea>
-                            @error('message')
-                                <div class="error" style="color:red;">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <div class="form-row">
-                            <input type="submit" class="form-field btn" value="Submit">
-                        </div>
-                    </form>
-                </div>
-                <div class="tile2">
-                    <div class="tile2-image">
-                        <img src="images/per.png">
-                    </div>
-                    <div>
-                        <div class="form-row">
-                            <img src="images/pho.png" class="contact-image"><span>+212 676680985</span>
-                        </div>
-                        <div class="form-row">
-                            <img src="images/mms.jpg" class="contact-image"><span>docplannerx2024@gmail.com</span>
-                        </div>
-                        <div class="form-row">
-                            <img src="images/loca.jpg" class="contact-image"><span>Street Jamal Eddine al Afghani </span><p>90000, Tangier</p>
+                        <div class="input-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" id="phone" name="phone" required>
                         </div>
                     </div>
-                </div>
+                    <div class="input-groupe">
+                        <label for="message">Message:</label>
+                        <input type="text" name="message" required>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
 
-   
-
-    <script>
-        function toggleMenu() {
-            var menuElement = document.getElementById("header-right-menu");
-            if (menuElement.style.display === "block") {
-                menuElement.style.display = "none";
-            } else {
-                menuElement.style.display = "block";
-            }
-        }
-    </script>
+    <div class="find-us-section">
+        <h2 class="find-us-title">Find Us Here</h2>
+        <div class="widgets">
+            <div class="widget">
+                <div class="widget-icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="widget-title">Phone</div>
+                <div class="widget-text">+123-456-7890</div>
+            </div>
+            <div class="widget">
+                <div class="widget-icon"><i class="fas fa-envelope"></i></div>
+                <div class="widget-title">Email</div>
+                <div class="widget-text">example@example.com</div>
+            </div>
+            <div class="widget">
+                <div class="widget-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="widget-title">Location</div>
+                <div class="widget-text">123 Main St, City, Country</div>
+            </div>
+        </div>
+    </div>
+    
 </body>
-
 </html>
