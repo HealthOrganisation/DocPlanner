@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <style>
@@ -30,7 +29,7 @@ body {
 
 .triangle-section {
     position: absolute;
-    top: 51%;
+    top: 66%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70%;
@@ -40,7 +39,7 @@ body {
 }
 
 .title-container {
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     margin-left: -13cm;
     color: rgb(0, 0, 0);
 }
@@ -141,14 +140,14 @@ button:hover {
 
 .widget {
     background-color: #e6f7ff;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     width: 40%;
     text-align: center;
 }
 
 .widget-icon {
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 10px;
     color: #3579c3; /* Blue color for the icons */
 }
@@ -162,6 +161,18 @@ button:hover {
     font-size: 18px;
     color: #555;
 }
+
+/* Google Map Section */
+.map-section {
+    margin-top: 6px;
+    text-align: center;
+}
+
+.map-container {
+    width: 70%;
+    height: 350px;
+    margin-left: 5.5cm;
+}
 </style>
 <body>
     <header>
@@ -169,7 +180,7 @@ button:hover {
     </header>
     <div class="contact-container">
         <div class="image-section">
-            <img src="images/cont.jpg" alt="Contact Image">
+            <img src="images/cont2.jpg" alt="Contact Image">
         </div>
         <div class="triangle-section">
             <div class="title-container">
@@ -177,15 +188,16 @@ button:hover {
                 <p>Kindly reach us to get the fastest response and treatment</p>
             </div>
             <div class="form-container">
-                <form action="/submit-contact" method="POST">
+                <form action="{{ route('contactus.store') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="input-group">
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="input-group">
-                            <label for="phone">Phone:</label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                     </div>
                     <div class="input-groupe">
@@ -218,6 +230,11 @@ button:hover {
             </div>
         </div>
     </div>
-    
+
+    <div class="map-section">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.943899019086!2d-122.08424968469173!3d37.421999979825195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb5f9f1d64a87%3A0xf1f8f1d64a87f1f8!2sGoogleplex!5e0!3m2!1sen!2sus!4v1636427472103!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
 </body>
 </html>
