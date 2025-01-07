@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\ContactFormMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Contactus;
+
 class ContactusController extends Controller
 {
     public function show()
@@ -22,7 +21,7 @@ class ContactusController extends Controller
             'email' => 'required|email|max:255',
             'message' => 'required|string',
         ]);
-        Contactus::create($validated);
+
         // Sanitize the validated input to prevent XSS attacks
         $sanitizedData = [
             'name' => htmlspecialchars($validated['name'], ENT_QUOTES, 'UTF-8'),
@@ -30,10 +29,22 @@ class ContactusController extends Controller
             'message' => htmlspecialchars($validated['message'], ENT_QUOTES, 'UTF-8')
         ];
 
-        // Send an email to the admin (your email)
-        Mail::to('newstvx2024@gmail.com')->send(new ContactFormMail($sanitizedData));
+        // Save the sanitized contact form data to the database
+        Contactus::create($sanitizedData);
 
-        // Redirect or return a response
+        // Send an email directly to the admin
+        $emailContent = "Name: " . $sanitizedData['name'] . "\n";
+        $emailContent .= "Email: " . $sanitizedData['email'] . "\n";
+        $emailContent .= "Message: " . $sanitizedData['message'];
+
+        // Send the email
+        Mail::raw($emailContent, function ($message) use ($sanitizedData) {
+            $message->to('newstvx2024@gmail.com')
+                    ->subject('New Contact Us Message')
+                    ->from($sanitizedData['email'], $sanitizedData['name']);
+        });
+
+        // Redirect or return a response with success message
         return redirect()->back()->with('success', 'Your message has been sent!');
     }
 }
