@@ -556,8 +556,10 @@
         </button>
     </div>
 </div>
-
-
+<br><br>
+<footer>
+    @include('footer')
+</footer>
 
 
 

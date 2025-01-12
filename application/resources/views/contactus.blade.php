@@ -236,5 +236,10 @@ button:hover {
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.943899019086!2d-122.08424968469173!3d37.421999979825195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb5f9f1d64a87%3A0xf1f8f1d64a87f1f8!2sGoogleplex!5e0!3m2!1sen!2sus!4v1636427472103!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
+    <br><br><br>
 </body>
+
+<footer>
+    @include('footer')
+</footer>
 </html>

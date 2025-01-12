@@ -189,7 +189,9 @@
     <div class="divider"></div>
 </div>
 
-
+<footer>
+    @include('footer')
+</footer>
 @endsection
 
 @section('styles')
