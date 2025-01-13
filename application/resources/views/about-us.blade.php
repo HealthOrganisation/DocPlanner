@@ -16,17 +16,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background: #e0f0ff; /* Light blue background */
+            background: #ffffff; /* Light blue background */
             color: #333;
             line-height: 1.6;
         }
 
         .about-header {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/GettyImages-2027653518.webp') no-repeat center center/cover;
+            background: url('../images/mid.jpg') no-repeat center center/cover;
             text-align: center;
-            color: white;
+            color: rgb(0, 0, 0);
             padding: 80px 20px;
-            border-bottom: 5px solid #ffd700; /* Gold color */
+            /* border-bottom: 5px solid #3579c3; Gold color */
             animation: fadeIn 1s ease-in-out;
         }
 
@@ -48,135 +48,94 @@
             padding: 0 20px;
         }
 
-        .about-container {
-            padding: 40px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            justify-items: center;
-        }
+        .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
 
-        .team-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 100%;
-            max-width: 340px;
-            opacity: 0; /* Start hidden */
-            transform: translateY(20px); /* Start off-screen for animation */
-            animation: slideIn 0.5s forwards; /* Slide in animation */
-        }
+.card-container {
+    display: flex;
+    gap: 20px;
+}
 
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    width: 300px;
+}
 
-        .team-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #e3f2fd; /* Light blue hover effect */
+}
 
-        .team-card .icon {
-            font-size: 3rem;
-            color: #007bff; /* Blue color */
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-        }
+.card i {
+    font-size: 3rem;
+    color: #3579c3;
+    margin-bottom: 10px;
+}
 
-        .team-card:hover .icon {
-            color: #ffd700; /* Change icon color on hover to gold */
-        }
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
 
-        .team-card h2 {
-            font-size: 1.8rem;
-            color: #3d1818;
-            margin-bottom: 10px;
-        }
+.card .line {
+    height: 3px;
+    background-color: #3579c3;
+    width: 50px;
+    margin: 0 auto 10px;
+}
 
-        .team-card p {
-            font-size: 1rem;
-            color: #555;
-        }
+.card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
 
-        @media (max-width: 768px) {
-            .about-header h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-header .mission {
-                font-size: 1.1rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="about-header">
         <h1>
-            Innovative Medical Appointment Management</h1>
-        <p class="mission">Our mission is to revolutionize appointment scheduling for patients by facilitating access to healthcare while ensuring a seamless, fast, and secure experience.</p>
+            About Us</h1>
+        <p class="mission">we strive to make healthcare simple, accessible, and reliable.</p>
     </div>
-    <main class="about-container">
-        <div class="team-card">
-            <div class="icon"><i class="fas fa-calendar-alt"></i></div>
-            <h2>Simplified Scheduling</h2>
-            <p>Our intuitive platform allows patients to book an appointment in just a few clicks, reducing waiting time and administrative hassle.</p>
-        </div>
-        <div class="team-card">
-            <div class="icon"><i class="fas fa-stethoscope"></i></div>
-            <h2>Connecting with Doctors</h2>
-            <p>We offer a wide selection of specialized doctors, ensuring that every patient finds the professional best suited to their needs.</p>
-        </div>
-        <div class="team-card">
-            <div class="icon"><i class="fas fa-comments"></i></div>
-            <h2>Dedicated Customer Support</h2>
-            <p>A dedicated support team is available to answer all your questions regarding appointment booking.</p>
-        </div>
-        <div class="team-card">
-            <div class="icon"><i class="fas fa-lock"></i></div>
-            <h2>Data Security</h2>
-            <p>We guarantee the protection of our patients' personal data through advanced security protocols that comply with privacy standards.</p>
-        </div>
-        <div class="team-card">
-            <div class="icon"><i class="fas fa-clipboard-check"></i></div>
-            <h2>Appointment Tracking</h2>
-            <p>Receive automatic reminders and easily check your appointment history to never miss a consultation.</p>
-        </div>
-        <div class="team-card">
-            <div class="icon"><i class="fas fa-user-md"></i></div>
-            <h2>Verified Healthcare Professionals</h2>
-            <p>All our doctors are carefully selected and verified to ensure the quality and reliability of the care provided.</p>
-        </div>
-    </main>
-    <script>
-        // Add animations to the header and cards
-        document.addEventListener("DOMContentLoaded", () => {
-            const header = document.querySelector(".about-header");
-            const cards = document.querySelectorAll(".team-card");
-
-            // Header animation
-            header.style.opacity = 0;
-            header.style.transform = "translateY(-20px)";
-            setTimeout(() => {
-                header.style.transition = "all 1s ease";
-                header.style.opacity = 1;
-                header.style.transform = "translateY(0)";
-            }, 200);
-
-            // Card animations on load
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animationDelay = `${index * 100}ms`; // Add delay for staggered effect
-                    card.style.animationDuration = "0.5s"; // Set animation duration
-                    card.style.animationFillMode = "forwards"; // Keep the end state
-                }, index * 300);
-            });
-        });
-    </script>
+    <main class="container">
+      <div class="card-container">
+          <div class="card">
+              <i class="fas fa-book"></i>
+              <h2>Our Mission</h2>
+              <div class="line"></div>
+              <p>We strive to provide the best services to our community by promoting education and continuous learning.</p>
+          </div>
+          <div class="card">
+              <i class="fas fa-globe"></i>
+              <h2>Our Vision</h2>
+              <div class="line"></div>
+              <p>To become a global leader in delivering accessible and high-quality healthcare solutions.</p>
+          </div>
+          <div class="card">
+              <i class="fas fa-trophy"></i>
+              <h2>Achievement</h2>
+              <div class="line"></div>
+              <p>Recognized as one of the top healthcare providers with numerous awards and accolades.</p>
+          </div>
+      </div>
+  </main>
+  
+   
 </body>
+<footer>
+    @include('footer')
+</footer>
 </html>
