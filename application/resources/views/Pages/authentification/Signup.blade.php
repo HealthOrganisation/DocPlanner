@@ -127,6 +127,47 @@
       font-size: 14px;
       margin-bottom: 15px;
     }
+    .wrapper form .field select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  background: white;
+  transition: all 0.3s ease;
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none; /* For other browsers */
+}
+
+.wrapper form .field select:focus,
+.wrapper form .field select:valid {
+  border-color: #3579c3;
+}
+
+.wrapper form .field label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  background: white;
+  padding: 0 5px;
+}
+
+form .field select:focus ~ label,
+form .field select:valid ~ label {
+  top: -10px;
+  font-size: 16px;
+  color: #3579c3;
+}
+
   </style>
 </head>
 <body>
@@ -168,13 +209,11 @@
           <label for="email">Email Address</label>
         </div>
         <div class="field">
-          <input 
-            type="role" 
-            id="role" 
-            name="role" 
-            value="{{ old('role') }}" 
-            required 
-          />
+          <select id="role" name="role" required>
+            <option value="" disabled selected></option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
           <label for="role">Role</label>
         </div>
         <div class="field">
