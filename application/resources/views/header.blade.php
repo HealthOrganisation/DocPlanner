@@ -2,17 +2,39 @@
   <nav class="navbar">
     <div class="logo">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-image" />
-      <span class="logo-textt">MyHealth</span> <!-- Added logo text -->
+      <span class="logo-textt">MyHealth</span>
     </div>
     <ul class="nav-links">
+      @if(Auth::check())
+        @if(Auth::user()->role == 'doctor')
+          <li><a href="/doctor">Doctor Dashboard</a></li>
+          <li><a href="/appointments">Appointments</a></li>
+        @else
+          <li><a href="/doctor">Doctors</a></li>
+          <li><a href="/my-appointments">My Appointments</a></li>
+        @endif
+
+        <!-- Logout Link styled like other links -->
+        <li>
+          <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+            @csrf
+            <a href="#" onclick="this.closest('form').submit();">Logout</a>
+          </form>
+        </li>
+
+      @else
       <li><a href="/">Home</a></li>
       <li><a href="/about-us">About</a></li>
       <li><a href="/contactus">Contact</a></li>
-      <li><a href="/articles">Articles</a></li>
       <li><a href="/login">Login</a></li>
+      @endif
+
+      <li><a href="/articles">Articles</a></li>
     </ul>
   </nav>
 </header>
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {

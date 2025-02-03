@@ -89,7 +89,7 @@ public function login(Request $request)
         if ($user->role === 'doctor') {
             return redirect()->route('doctor.profile'); // Redirection pour les médecins
         } elseif ($user->role === 'patient') {
-            return redirect()->route('patient.dashboard'); // Redirection pour les patients
+            return redirect()->route('home'); // Redirection pour les patients
         }
     }
 
@@ -109,5 +109,10 @@ public function login(Request $request)
 
         $user->delete();
             return responce()->json(['message' => 'user delete avec succe']);
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/'); // Redirect to the home page after logging out
     }
 }

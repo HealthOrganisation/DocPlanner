@@ -83,7 +83,8 @@
         </div>
         <div class="form-actions">
           <button type="button" id="discardChanges">Discard Changes</button>
-          <button type="submit">Save Changes</button>
+         
+          <button type="submit" id="saveChanges">Save Changes</button>
         </div>
       </form>
 
@@ -830,4 +831,5 @@ input, select {
  
   </style>
 </body>
+
 </html>
