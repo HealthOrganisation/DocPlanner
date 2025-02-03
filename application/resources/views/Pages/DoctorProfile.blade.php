@@ -18,10 +18,10 @@
         <h2 id="fullName">Dr. John Doe</h2>
         <p id="specialty">Cardiologist</p>
         <div class="actions">
-          <button class="edit-btn">✏️</button>
-          <button class="delete-btn">🗑️</button>
-        </div>
-      </div>
+        <button class="edit-btn" onclick="editPhoto()">✏️</button>
+        <button class="delete-btn" onclick="deletePhoto()">🗑️</button>
+    </div>
+       </div>
  <!-- ici le docteur peut modifier ses informations  -->
 
 
@@ -30,6 +30,7 @@
       <nav>
         <ul>
           <li class="nav-item" id="navPersonalInfo">🧑‍💼 Personal Information</li>
+          <li class="nav-item" id="navCertifications">📜 Certifications & Degrees</li>
           <li class="nav-item" id="navAvailability">📅 Availability</li>
           <li class="nav-item" id="navStatistics">📊 Statistics</li>
           <li class="nav-item" id="navReviews">💬 Patient Reviews</li>
@@ -41,7 +42,7 @@
 
     <!-- Main Content -->
     <section class="profile-form">
-      <h1><i><center>Doctor Profile</center></i></h1>
+      <h1><i><center>Doctor Panel</center></i></h1>
       <br>
 
       <!-- Personal Information Form -->
@@ -65,17 +66,16 @@
           </select>
         </div>
         <div class="form-group">
-          <input id="degrees" type="text" placeholder="Degrees/Certifications" />
+         
           <input id="experience" type="text" placeholder="Years of Experience" />
         </div>
         <div>
-          <label>Select Languages:</label>
+          <label>Spoken Languages: </label><br>
           <div class="language-options">
             <label><input type="checkbox" value="Français" /> Français</label>
-            <label><input type="checkbox" value="Espagnol" /> Espagnol</label>
             <label><input type="checkbox" value="Anglais" /> Anglais</label>
             <label><input type="checkbox" value="Arabe" /> Arabe</label>
-            <label><input type="checkbox" value="Allemand" /> Allemand</label>
+            <label><input type="checkbox" value="Other" /> Other</label>
           </div>
         </div>
         <div class="form-group">
@@ -87,6 +87,32 @@
           <button type="submit" id="saveChanges">Save Changes</button>
         </div>
       </form>
+
+      <!-- Ajout de la section Certifications -->
+<div id="certificationsSection" class="hidden">
+  <h3>Certifications & Degrees</h3>
+  <form id="certificationsForm" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="text" id="certificationName" placeholder="Certification/Degree Name" />
+      <input type="text" id="certificationInstitution" placeholder="Institution Name" />
+    </div>
+    <div class="form-group">
+      <input type="date" id="certificationDate" placeholder="Date Obtained" />
+    </div>
+
+    <div class="form-group">
+
+      
+      <input type="file" id="certificationImage" accept="image/*" />
+    </div>
+    <div class="form-actions">
+      <button type="button" id="addCertification">Add Certification</button>
+    </div>
+  </form>
+  <h4>Existing Certifications:</h4>
+  <ul id="certificationsList"></ul>
+</div>
+
 
       <!-- Availability Section -->
       <div id="availabilitySection">
@@ -118,7 +144,7 @@
       
           <!-- Saved Availabilities -->
           <div id="availabilityList">
-            <h3>Saved Availabilities</h3>
+            <h3 style="font-size: 1.5rem; color: #007bff; font-weight: bold; text-shadow: 0 1px 2px rgba(0, 123, 255, 0.3); margin-bottom: 10px;" >Saved Availabilities:</h3>
             <ul id="availabilities"></ul>
           </div>
       
@@ -168,30 +194,80 @@
         </div>
       </div>
 
-      <!-- Patient Reviews Section -->
-      <div id="reviewsSection" class="hidden">
-        <h3>Patient Reviews</h3>
-        <div class="review-container">
-          <img id="reviewImage" src="pat2.png" alt="Review" class="review-image" />
-          <div class="review-details">
-            <h3 id="reviewName">John Doe</h3>
-            <p id="reviewComment">Great doctor!</p>
-            <div class="stars" id="reviewStars">
-              ⭐⭐⭐⭐⭐
-            </div>
-          </div>
-          <div class="review-navigation">
-            <button id="prevReview">Previous</button>
-            <button id="nextReview">Next</button>
-          </div>
-        </div>
+<!-- Sections review  -->
+<div id="reviewsSection" class="hidden"> <!-- Ajoutez la classe hidden ici -->
+<div class="header"><h3>Patients Reviews</h3><br><br></div>
+        
+<div class="cards-wrapper">
+    
+    <div class="arrow left-arrow" id="prev">❮</div> <!-- Flèche gauche -->
+    <div class="cards-container">
+      <!-- Card 1 -->
+      <div class="card">
+        <img src="images/pat2.png" alt="Michael Jackson" class="profile-pic">
+        <div class="stars">★★★★★</div>
+        <h3 class="name">Michael sofi </h3>
+        <p class="role"></p>
+        <p class="quote">
+          <span class="quote-icon">❝</span>
+          Dr. Michael Doe est très professionnel et à l'écoute. elle a pris le temps de répondre à toutes mes questions  <span class="quote-icon">❞</span>
+        </p>
       </div>
 
+      <!-- Card 2 -->
+      <div class="card highlighted">
+        <img src="images/pat3.jpg" alt="Parvez Hossein" class="profile-pic">
+        <div class="stars">★★★★★</div>
+        <h3 class="name">Parvez Hossein</h3>
+        <p class="role"></p>
+        <p class="quote">
+          <span class="quote-icon">❝</span>
+          Dr. Parvez est très professionnel et à l'écoute. Il a pris le temps de répondre à toutes mes questions  <span class="quote-icon">❞</span>
+       <span class="quote-icon">❞</span>
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <img src="images/pat2.png" alt="Shoikot Hasan" class="profile-pic">
+        <div class="stars">★★★★★</div>
+        <h3 class="name">Shoikot dina </h3>
+        <p class="role"></p>
+        <p class="quote">
+          <span class="quote-icon">❝</span>
+          Dr. Shoikot est très professionnel et à l'écoute. elle a pris le temps de répondre à toutes mes questions  <span class="quote-icon">❞</span>
+       <span class="quote-icon">❞</span>
+        </p>
+      </div>
+    </div>
+    <div class="arrow right-arrow" id="next">❯</div> <!-- Flèche droite -->
+  </div>
+</div>
   
+<!-- #region -->
     </section>
   </div>
   <script > 
     document.addEventListener("DOMContentLoaded", () => {
+      function editPhoto() {
+    const newPhoto = prompt("Entrez le lien de la nouvelle photo :");
+    if (newPhoto) {
+      document.getElementById("profileImg").src = newPhoto;
+      alert("Photo mise à jour !");
+    }
+  }
+
+  // Fonction pour supprimer la photo
+  function deletePhoto() {
+    if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
+      document.getElementById("profileImg").src = "/images/placeholder.jpg"; // Chemin de l'image par défaut
+      alert("Photo supprimée !");
+    }
+  }
+  // Attacher les fonctions aux boutons (au cas où vous préférez un ajout via JS)
+  document.querySelector(".edit-btn").addEventListener("click", editPhoto);
+  document.querySelector(".delete-btn").addEventListener("click", deletePhoto);
+
   // Log Out
   const navLogout = document.getElementById("navLogout");
   navLogout.addEventListener("click", () => {
@@ -297,7 +373,36 @@
   let languages = [];
   let activeItem = "Personal Information";
 
-  // Gestion des reviews
+  /*Gestion des reviews*/
+  const cards = document.querySelectorAll(".card");
+    const prevArrow = document.getElementById("prev");
+    const nextArrow = document.getElementById("next");
+    let currentIndex = 1; // Start with the highlighted card
+
+    function updateCards() {
+      cards.forEach((card, index) => {
+        if (index === currentIndex) {
+          card.classList.add("highlighted");
+        } else {
+          card.classList.remove("highlighted");
+        }
+      });
+    }
+
+    prevArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateCards();
+    });
+
+    nextArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCards();
+    });
+
+    // Initial load
+    updateCards();
+  
+/*
   let currentReview = 0;
   const reviews = [
     {
@@ -347,7 +452,7 @@
       updateReview();
     }
   });
-
+*/
   // Afficher et masquer les sections
   const showSection = (sectionId) => {
     const sections = [
@@ -356,6 +461,7 @@
       "statisticsSection",
       "reviewsSection",
       "logoutSection",
+      "certificationsSection",
     ];
 
     sections.forEach((id) => {
@@ -373,6 +479,10 @@
   document.getElementById("navPersonalInfo").addEventListener("click", () =>
     showSection("personalInfoForm")
   );
+  // Ajout d'une gestion des clics sur la section Certifications
+document.getElementById("navCertifications").addEventListener("click", () => {
+  showSection("certificationsSection");
+});
   document.getElementById("navAvailability").addEventListener("click", () =>
     showSection("availabilitySection")
   );
@@ -382,7 +492,72 @@
   document.getElementById("navReviews").addEventListener("click", () =>
     showSection("reviewsSection")
   );
+ 
+//edit la photo y
+function editPhoto() {
+    const newPhoto = prompt("Entrez le lien de la nouvelle photo :");
+    if (newPhoto) {
+        document.getElementById('profileImg').src = newPhoto;
+        alert("Photo mise à jour !");
+    }
+}
 
+function deletePhoto() {
+    if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
+        document.getElementById('profileImg').src = "placeholder.jpg"; // Image de remplacement
+        alert("Photo supprimée !");
+    }
+}
+
+// Gestion des certifications
+const certificationsList = document.getElementById("certificationsList");
+
+document.getElementById("addCertification").addEventListener("click", () => {
+  const name = document.getElementById("certificationName").value;
+  const institution = document.getElementById("certificationInstitution").value;
+  const date = document.getElementById("certificationDate").value;
+  const imageInput = document.getElementById("certificationImage");
+
+  if (name && institution && date && imageInput.files.length > 0) {
+    // Créer un nouvel élément de liste
+    const li = document.createElement("li");
+
+    // Ajouter les détails de la certification
+    const details = document.createElement("div");
+    details.innerHTML = `<strong>${name}</strong> - ${institution} (${date})`;
+    
+    // Ajouter l'image de la certification
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(imageInput.files[0]);
+    img.alt = `${name} Certificate`;
+    img.style.width = "100px";
+    img.style.height = "auto";
+    img.style.marginRight = "10px";
+    img.style.borderRadius = "4px";
+
+    // Ajouter un bouton de suppression
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "❌";
+    deleteBtn.addEventListener("click", () => {
+      certificationsList.removeChild(li);
+    });
+
+    // Assembler les éléments
+    li.appendChild(img);
+    li.appendChild(details);
+    li.appendChild(deleteBtn);
+
+    certificationsList.appendChild(li);
+
+    // Réinitialiser les champs
+    document.getElementById("certificationName").value = "";
+    document.getElementById("certificationInstitution").value = "";
+    document.getElementById("certificationDate").value = "";
+    document.getElementById("certificationImage").value = "";
+  } else {
+    alert("Veuillez remplir tous les champs et télécharger une image !");
+  }
+});
   // Initialisation
   showSection("personalInfoForm");
   updateReview();
@@ -419,49 +594,52 @@ input, select {
        
         margin: 0;
         padding: 0;
-           background-image: url(/images/3d.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-          height: 100vh;
-      }
+
+}
       
 /* Calendar Container */
 .calendar-container {
-    background: #fff;
-    padding: 10px;
-    color: #222;
-    border-radius: 8px;
-  }
-  
-  .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  
-  .days,
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-  }
-  
-  .calendar-cell {
-    background: #d8d8d8;
-    border-radius: 50%;
-    padding: 10px;
-    margin: 2px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-  }
-  
-  .calendar-cell:hover {
-    background: #00d1ff;
-    transform: translateY(-2px);
-  }
+  background: #fff;
+  padding: 15px; /* Réduction du padding */
+  color: #222;
+  border-radius: 8px;
+  width: 720px; /* Largeur du conteneur pour réduire la taille globale */
+  margin: 0 auto; /* Centrer le calendrier */
+}
+
+/* Calendar Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem; /* Taille de texte réduite */
+  font-weight: bold;
+}
+
+/* Calendar Grid */
+.days,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Toujours 7 colonnes */
+  text-align: center;
+  gap: 5px; /* Espacement réduit entre les cellules */
+}
+
+/* Calendar Cell */
+.calendar-cell {
+  background: #d8d8d8;
+  border-radius: 50%;
+  padding: 8px; /* Réduction de la taille des cellules */
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-size: 0.8rem; /* Réduction de la taille du texte dans les cellules */
+}
+
+.calendar-cell:hover {
+  background: #00d1ff;
+  transform: translateY(-2px);
+}
   
   /* Modal Overlay */
   .modal-overlay {
@@ -577,12 +755,9 @@ input, select {
   /* Profile Container */
   .profile-container {
     display: flex;
-    max-width: 900px;
-    margin: 6rem auto;
-    background: #f4f4f4;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
+    height: 100vh;
+   
+
   }
   
   /* Sidebar */
@@ -709,6 +884,7 @@ input, select {
     transform: translateY(-2px);
     opacity: 0.5;
   }
+  /*
   .reviews-section {
     text-align: center;
     margin: 20px 0;
@@ -727,8 +903,8 @@ input, select {
   .review-image {
     display: block;
     margin: 0 auto;
-    width: 50px; /* Ajustez selon vos besoins */
-    height: 50px; /* Ajustez selon vos besoins */
+    width: 50px; /* Ajustez selon vos besoins
+    height: 50px; /* Ajustez selon vos besoins 
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
@@ -783,25 +959,126 @@ input, select {
     background-color: #cccccc;
     cursor: not-allowed;
   }
-  
+  */
+  .cards-wrapper {
+  display: flex;
+  align-items: center; /* Centre les flèches verticalement */
+  justify-content: center; /* Centre les cartes et les flèches horizontalement */
+  gap: 20px; /* Espace entre les flèches et les cartes */
+  position: relative; /* Nécessaire pour positionner les flèches correctement */
+}
+
+.arrow {
+  font-size: 2rem;
+  color: #007bff;
+  cursor: pointer;
+  user-select: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #f9f9f9; /* Couleur de fond */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10; /* S'assure que les flèches sont toujours visibles */
+}
+
+.arrow:hover {
+  background-color: #007bff; /* Change de couleur au survol */
+  color: #fff;
+  transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
+
+.cards-container {
+  display: flex;
+  gap: 20px; /* Espace entre les cartes */
+  }
+
+.card {
+  background-color: white;
+  border-radius: 15px;
+  text-align: center;
+  padding: 5px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.card.highlighted {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.card.highlighted .stars {
+  color: #ffd700;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid white;
+}
+
+.stars {
+  color: #007bff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.role {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.quote {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.card.highlighted .quote {
+  color: white;
+}
+
+.quote-icon {
+  color: #007bff;
+  font-size: 1.5rem;
+  margin: 0 5px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
   .statistics-section {
     text-align: center;
     margin: 30px 0;
   }
   
   .stat-badges {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Deux badges par ligne */
+  gap: 10px; /* Espace entre les badges */
+  justify-items: center; /* Centrer horizontalement chaque badge */
+}
   
   .stat-badge {
     background: #f9f9f9;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-    width: 150px;
+    width: 200px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   .stat-badge i {
@@ -828,7 +1105,113 @@ input, select {
     color: #007bff;
   }
   
- 
+  #certificationsSection {
+  padding: 0.3rem;
+  background: linear-gradient(135deg,rgb(255, 255, 255), #ffffff); /* Dégradé doux */
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Ombre moderne */
+}
+
+#certificationsSection h3 {
+  text-align: center;
+  color: #007bff;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 123, 255, 0.3); /* Texte lumineux */
+}
+
+#certificationsForm {
+  display: grid;
+  gap: 1rem;
+}
+
+#certificationsForm .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#certificationsForm input,
+#certificationsForm button {
+  width: 300px;
+  padding: 0.8rem;
+  margin: 0 auto;
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#certificationsForm input {
+  background: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#certificationsForm input:focus {
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  border: 1px solid #007bff;
+}
+
+#certificationsForm button {
+  background: linear-gradient(135deg, #007bff, #00bfff);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+#certificationsForm button:hover {
+  background: linear-gradient(135deg, #0056b3, #007bff);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+#certificationsList {
+  list-style: none;
+  margin-top: 2rem;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+#certificationsList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffffff, #f0f8ff);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#certificationsList li img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solidrgb(192, 199, 206);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#certificationsList li button {
+  background: #ff6b6b;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#certificationsList li button:hover {
+  background: #d32f2f;
+  box-shadow: 0 4px 6px rgba(211, 47, 47, 0.3);
+}
+
   </style>
 </body>
 
