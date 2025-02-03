@@ -8,9 +8,10 @@ use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AppointmentController;
 
 use App\Http\Controllers\HomeController;
-
+use App\Models\Appointment;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,4 +45,12 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/DoctorProfile', [DoctorController::class, 'showProfile'])->name('doctor.profile');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/DoctorProfile', [AppointmentController::class, 'appointment'])->name('doctor.profile');
+});
+
+Route::get('/appointment', function () {
+    return view('appointments'); // Cette vue affichera le design
 });
