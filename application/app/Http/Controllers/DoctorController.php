@@ -10,4 +10,8 @@ class DoctorController extends Controller
     {
         return view('Pages.DoctorProfile');
     }
+    public function doctor()
+    {
+        return view('doctor');
+    }
 }

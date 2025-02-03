@@ -29,11 +29,17 @@ Route::get('/Doctor', function () {
     return view('Pages.DoctorProfile');
 });
 
+// Logout route
+Route::post('/logout', function() {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home'); 
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
+
 Route::get('/articles', [ArticlesController::class, 'show']);
 Route::get('/contactus', [ContactusController::class, 'show'])->name('contactus.show');
 
@@ -45,10 +51,6 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/DoctorProfile', [DoctorController::class, 'showProfile'])->name('doctor.profile');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/DoctorProfile', [AppointmentController::class, 'appointment'])->name('doctor.profile');
 });
 
 Route::get('/appointment', function () {
