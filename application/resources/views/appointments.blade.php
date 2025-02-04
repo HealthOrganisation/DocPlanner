@@ -163,122 +163,67 @@
   </div>
 
   <script>
-    let currentStep = 'service';
-    const formData = {
-      treatment: '',
-      doctor: '',
-      date: '',
-      time: '',
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      address: ''
-    };
+    async function fetchTreatments() {
+  const response = await fetch('/api/treatments');
+  const treatments = await response.json();
 
-    function renderForm() {
-      const formStep = document.getElementById('form-step');
-      formStep.innerHTML = '';
+  const treatmentSelect = document.querySelector('select[name="treatment"]');
+  treatments.forEach((treatment) => {
+    const option = document.createElement('option');
+    option.value = treatment;
+    option.textContent = treatment;
+    treatmentSelect.appendChild(option);
+  });
+}
 
-      document.querySelectorAll('.step').forEach((step, index) => {
-    step.classList.toggle('active-step', index <= getStepIndex(currentStep));
+async function fetchDoctors(treatment) {
+  const response = await fetch(`/api/doctors?treatment=${treatment}`);
+  const doctors = await response.json();
+
+  const doctorSelect = document.querySelector('select[name="doctor"]');
+  doctorSelect.innerHTML = '<option value="">Select doctor</option>'; // Clear previous options
+  doctors.forEach((doctor) => {
+    const option = document.createElement('option');
+    option.value = doctor.id_doctor;
+    option.textContent = `${doctor.nom} - ${doctor.specialite}`;
+    doctorSelect.appendChild(option);
+  });
+}
+
+async function fetchAvailableTimes(doctorId, date) {
+  const response = await fetch(`/api/available-times?doctor_id=${doctorId}&date=${date}`);
+  const times = await response.json();
+
+  const timeSelect = document.querySelector('select[name="time"]');
+  timeSelect.innerHTML = '<option value="">Select time</option>'; // Clear previous options
+  times.forEach((time) => {
+    const option = document.createElement('option');
+    option.value = time.start_time;
+    option.textContent = `${time.start_time} - ${time.end_time}`;
+    timeSelect.appendChild(option);
+  });
+}
+
+async function bookAppointment() {
+  const appointmentData = {
+    id_doctor: formData.doctor,
+    id_dispo: formData.time, // Adjust this to map the availability ID
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    phone: formData.phone,
+    email: formData.email,
+  };
+
+  const response = await fetch('/api/book-appointment', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(appointmentData),
   });
 
-  document.querySelectorAll('.line').forEach((line, index) => {
-    line.classList.toggle('active-line', index < getStepIndex(currentStep));
-  });
+  const result = await response.json();
+  alert(result.message);
+}
 
-      document.getElementById('back-btn').style.display = currentStep === 'service' ? 'none' : 'inline-block';
-
-      if (currentStep === 'service') {
-        formStep.innerHTML = `
-          <label>Treatment</label>
-          <select name="treatment" onchange="handleInputChange(event)">
-            <option value="">Select treatment</option>
-            <option value="Dentiste">Dentiste</option>
-            <option value="Pédiatre">Pédiatre</option>
-            <option value="Psychiatre">Psychiatre</option>
-            <option value="Cardiologue">Cardiologuey</option>
-          </select>
-          <label>Doctor</label>
-          <select name="doctor" onchange="handleInputChange(event)">
-            <option value="">Select doctor</option>
-            <option value="dr-smith">Dr. Smith - General Medicine</option>
-            <option value="dr-jones">Dr. Jones - Dentist</option>
-            <option value="dr-wilson">Dr. Wilson - Cardiologist</option>
-          </select>
-        `;
-      } else if (currentStep === 'time') {
-        formStep.innerHTML = `
-          <label>Date</label>
-          <input type="date" name="date" onchange="handleInputChange(event)">
-          <label>Time</label>
-          <select name="time" onchange="handleInputChange(event)">
-            <option value="">Select time</option>
-            <option value="09:00">09:00 AM</option>
-            <option value="10:00">10:00 AM</option>
-            <option value="11:00">11:00 AM</option>
-            <option value="14:00">02:00 PM</option>
-            <option value="15:00">03:00 PM</option>
-          </select>
-        `;
-      } else if (currentStep === 'details') {
-        formStep.innerHTML = `
-          <form class="details-form">
-            <div class="row">
-              <div>
-                <label>First Name</label>
-                <input type="text" name="firstName" onchange="handleInputChange(event)">
-              </div>
-              <div>
-                <label>Last Name</label>
-                <input type="text" name="lastName" onchange="handleInputChange(event)">
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <label>Phone</label>
-                <input type="text" name="phone" onchange="handleInputChange(event)">
-              </div>
-              <div>
-                <label>Email</label>
-                <input type="email" name="email" onchange="handleInputChange(event)">
-              </div>
-            </div>
-            <div>
-              <label>Address</label>
-              <input type="text" name="address" onchange="handleInputChange(event)">
-            </div>
-          </form>
-        `;
-      } else if (currentStep === 'done') {
-        formStep.innerHTML = `<h2>Appointment Booked Successfully!</h2>`;
-      }
-    }
-
-    function getStepIndex(step) {
-      return ['service', 'time', 'details', 'done'].indexOf(step);
-    }
-
-    function handleInputChange(event) {
-      formData[event.target.name] = event.target.value;
-    }
-
-    function handleNext() {
-      if (currentStep === 'service') currentStep = 'time';
-      else if (currentStep === 'time') currentStep = 'details';
-      else if (currentStep === 'details') currentStep = 'done';
-      renderForm();
-    }
-
-    function handleBack() {
-      if (currentStep === 'time') currentStep = 'service';
-      else if (currentStep === 'details') currentStep = 'time';
-      else if (currentStep === 'done') currentStep = 'details';
-      renderForm();
-    }
-
-    renderForm();
   </script>
 </body>
 </html>
