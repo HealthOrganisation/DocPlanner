@@ -56,3 +56,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/appointment', function () {
     return view('appointments'); // Cette vue affichera le design
 });
+
+Route::get('/PatientProfile', function () {
+    return view('PatientProfile'); // Cette vue affichera le design
+});
