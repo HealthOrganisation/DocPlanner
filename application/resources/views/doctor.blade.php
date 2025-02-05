@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <style>
 body {
@@ -18,7 +20,7 @@ body {
 }
 
 .image-section {
-    height: 80%;
+    height: 90%;
 }
 
 .image-section img {
@@ -53,125 +55,139 @@ body {
     font-size: 18px;
 }
 
-.form-container {
-    background: white;
-    padding: 30px;
-    box-shadow: 11px 31px 61px 0px rgba(158, 158, 158, 1);
-    border-radius: 30px;
-    width: 100%;
+.filter-buttons {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.row {
-    display: flex;
-    gap: 1.5cm;
-    margin-left: 6cm;
-    margin-top: 0.6cm;
+.filter-buttons button {
+    background-color: #dfdfdf;
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    width: 29%;
-}
-
-.input-group input,
-.input-group textarea {
-    padding: 13px;
-    border: 1px solid #999999;
-    border-radius: 15px;
-    width: 100%;
-}
-
-.input-groupe {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    width: 50%;
-    margin-left: 6cm;
-}
-
-.input-groupe input,
-.input-groupe textarea {
-    padding: 13px;
-    border: 1px solid #999999;
-    border-radius: 15px;
-    width: 100%;
-}
-
-textarea {
-    height: 100px;
-    resize: none;
-}
-
-button {
-    width: 15%;
-    padding: 10px;
+.filter-buttons button:hover {
     background-color: #3579c3;
     color: white;
-    border: none;
-    border-radius: 17px;
-    cursor: pointer;
-    margin-left: 10cm;
 }
 
-button:hover {
-    background-color: #285a8e;
-}
-
-/* Find Us Here Section */
-.find-us-section {
+.doctor-profiles {
     text-align: center;
-    background-color: #ffffff;
-    padding: 50px 20px;
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    margin-top: -250px;
+    position: relative;
+    z-index: 2;
 }
 
-.find-us-title {
-    font-size: 36px;
-    margin-bottom: 30px;
-    margin-right: 20cm;
-}
-
-.widgets {
-    display: flex;
-    justify-content: space-around;
+.doctor-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.widget {
-    background-color: #e6f7ff;
-    padding: 15px;
+.doctor-card {
+    background: #efefef;
+    padding: 20px;
     border-radius: 10px;
-    width: 40%;
     text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.widget-icon {
-    font-size: 30px;
-    margin-bottom: 10px;
-    color: #3579c3; /* Blue color for the icons */
+.doctor-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
 }
 
-.widget-title {
-    font-size: 24px;
-    margin-bottom: 5px;
+.doctor-card h3 {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #333;
 }
 
-.widget-text {
-    font-size: 18px;
-    color: #555;
+.doctor-card p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
 }
 
-/* Google Map Section */
-.map-section {
-    margin-top: 6px;
-    text-align: center;
+.profile-btn {
+    background-color: #3579c3;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px;
 }
 
-.map-container {
-    width: 70%;
-    height: 350px;
-    margin-left: 5.5cm;
+.profile-btn:hover {
+    background-color: #285a8e;
+}.searchBox {
+    position: absolute;
+    top: 2%;
+    left: 10%;
+    transform:  translate(-50%,50%);
+    background: #285a8e;
+    height: 40px;
+    border-radius: 40px;
+    padding: 2px;
+
+}
+
+.searchBox:hover > .searchInput {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+  background: white;
+  color : #285a8e;
+}
+
+.searchButton {
+    color: white;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #285a8e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+
+}
+
+@media screen and (max-width: 620px) {
+.searchBox:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+}
 }
 </style>
 <body>
@@ -185,19 +201,83 @@ button:hover {
         <div class="triangle-section">
             <div class="title-container">
                 <h1>Introduce you to our experts</h1>
-                <p>choose from our experts doctors and get the help you need</p>
+                <p>Choose from our expert doctors and get the help you need</p>
             </div>
-           
+        </div>
+        
+        <div class="doctor-profiles">
+            <div class="searchBox">
+
+                <input class="searchInput"type="text" name="" placeholder="Search">
+                <button class="searchButton" href="#">
+                    <i class="material-icons">
+                        search
+                    </i>
+                </button>
+            </div>
+            <div class="filter-buttons">
+                <button onclick="filterDoctors('all')">All</button>
+                <button onclick="filterDoctors('Cardiologist')">Cardiologist</button>
+                <button onclick="filterDoctors('Dermatologist')">Dermatologist</button>
+                <button onclick="filterDoctors('Neurologist')">Neurologist</button>
+                <button onclick="filterDoctors('Orthopedic Surgeon')">Orthopedic Surgeon</button>
+                <button onclick="filterDoctors('Pediatrician')">Pediatrician</button>
+                <button onclick="filterDoctors('Oncologist')">Oncologist</button>
+            </div>
+            <div class="doctor-container">
+                <div class="doctor-card" data-specialty="Cardiologist">
+                    <img src="images/prof.jpg" alt="Doctor 1">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Cardiologist</p>
+                    <a href="#" class="profile-btn">View Profile</a>
+                </div>
+                <div class="doctor-card" data-specialty="Dermatologist">
+                    <img src="images/prof.jpg" alt="Doctor 2">
+                    <h3>Dr. James Smith</h3>
+                    <p>Dermatologist</p>
+                    <a href="#" class="profile-btn">View Profile</a>
+                </div>
+                <div class="doctor-card" data-specialty="Neurologist">
+                    <img src="images/prof.jpg" alt="Doctor 3">
+                    <h3>Dr. Emily Brown</h3>
+                    <p>Neurologist</p>
+                    <a href="#" class="profile-btn">View Profile</a>
+                </div>
+                <div class="doctor-card" data-specialty="Orthopedic Surgeon">
+                    <img src="images/prof.jpg" alt="Doctor 4">
+                    <h3>Dr. Michael Lee</h3>
+                    <p>Orthopedic Surgeon</p>
+                    <a href="#" class="profile-btn">View Profile</a>
+                </div>
+                <div class="doctor-card" data-specialty="Pediatrician">
+                    <img src="images/prof.jpg" alt="Doctor 5">
+                    <h3>Dr. Anna White</h3>
+                    <p>Pediatrician</p>
+                    <a href="#" class="profile-btn">View Profile</a>
+                </div>
+                <div class="doctor-card" data-specialty="Oncologist">
+                    <img src="images/prof.jpg" alt="Doctor 6">
+                    <h3>Dr. Robert Green</h3>
+                    <p>Oncologist</p>
+                    <a href="#" class="profile-btn">View Profile</a>
+                </div>
+            </div>
         </div>
     </div>
-
-    
-
-    
-    <br><br><br>
-</body>
-
-<footer>
-    @include('footer')
-</footer>
+    <footer>
+        @include('footer')
+    </footer>
+    </body>
+    <script>
+        function filterDoctors(specialty) {
+            const doctors = document.querySelectorAll('.doctor-card');
+            doctors.forEach(doctor => {
+                if (specialty === 'all' || doctor.getAttribute('data-specialty') === specialty) {
+                    doctor.style.display = 'block';
+                } else {
+                    doctor.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </html>
