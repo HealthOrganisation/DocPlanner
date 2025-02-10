@@ -36,7 +36,7 @@ Route::post('/logout', function() {
 })->name('logout');
 
 
-
+Route::get('/', [HomeController::class, 'index'])->name('home'); 
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
 
