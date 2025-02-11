@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup Form</title>
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
@@ -187,6 +189,8 @@ form .field select:valid ~ label {
       @endif
 
       <form id="signupForm" method="POST" action="{{ route('user.store') }}">
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
         @csrf
         <div class="field">
           <input 

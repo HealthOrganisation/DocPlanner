@@ -151,7 +151,6 @@
   <div class="line" id="line-3"></div>
   <div class="step" id="step-4">4</div>
 </div>
-
       <div id="form-step">
         <!-- Dynamic Form Content -->
       </div>
@@ -161,7 +160,6 @@
       </div>
     </div>
   </div>
-
   <script>
     async function fetchTreatments() {
   const response = await fetch('/api/treatments');
