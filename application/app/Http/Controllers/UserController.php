@@ -89,7 +89,7 @@ public function login(Request $request)
         if ($user->role === 'doctor') {
             return redirect()->route('doctor.profile'); // Redirection pour les médecins
         } elseif ($user->role === 'patient') {
-            return redirect()->route('home'); // Redirection pour les patients
+            return redirect()->route('doctor'); // Redirection pour les patients
         }
     }
 
