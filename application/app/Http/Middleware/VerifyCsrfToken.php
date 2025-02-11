@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'signup'
+        'login', // Ajoutez une virgule ici
+        'signup' // Pas de virgule après le dernier élément
     ];
 }

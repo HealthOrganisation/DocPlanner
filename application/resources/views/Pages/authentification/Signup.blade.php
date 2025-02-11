@@ -189,8 +189,6 @@ form .field select:valid ~ label {
       @endif
 
       <form id="signupForm" method="POST" action="{{ route('user.store') }}">
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
         @csrf
         <div class="field">
           <input 
