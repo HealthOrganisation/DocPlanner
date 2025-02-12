@@ -40,8 +40,12 @@ Route::post('/logout', function() {
 Route::get('/', [HomeController::class, 'index'])->name('home'); 
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
+//////////////////////////////////////////////////
+Route::get('/articles', [ArticlesController::class, 'show'])->name('articles');;
+Route::get('/articles/{id}', [ArticlesController::class, 'find'])->name('show');
+Route::get('/articles', [ArticlesController::class, 'showArticles']);
 
-Route::get('/articles', [ArticlesController::class, 'show']);
+/////////////////////////////////////////
 Route::get('/contactus', [ContactusController::class, 'show'])->name('contactus.show');
 
 Route::post('/contactus', [ContactusController::class, 'store'])->name('contactus.store');
