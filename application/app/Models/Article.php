@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,13 +8,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'id_admin',
-        'title',
-        'content',
-        'date_posted',
-        'image',
-    ];
+    protected $fillable = ['id_admin', 'title', 'content', 'category', 'date_posted', 'image'];
 
     public function admin()
     {
