@@ -12,7 +12,7 @@ class Availability extends Model
     protected $primaryKey = 'id_dispo';
 
     protected $fillable = [
-        'id_doc',
+        'id_doctor',
         'date',
         'start_time',
         'end_time',
@@ -21,6 +21,6 @@ class Availability extends Model
 
     public function doctor()
     {
-        return $this->belongsTo(Doctor::class, 'id_doc');
+        return $this->belongsTo(Doctor::class, 'id_doctor');
     }
 }
