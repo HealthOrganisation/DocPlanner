@@ -1,148 +1,103 @@
 @extends('layouts.app')
 
 @section('content')
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Include Bootstrap & jQuery -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <header>
     @include('header')
 </header>
+
+<br><br>
+
 <div class="container emp-profile">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
+                    {{-- <img src="{{ asset('storage/images/' . $doctor->image) }}" alt="Doctor Image" class="profile-image"> --}}
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
-                            <h5>
-                                Kshiti Ghelani
-                            </h5>
-                            <h6>
-                                Web Developer and Designer
-                            </h6>
-                          
+                    <h5>{{ $doctor->nom }}</h5>
+                    <br>
+                    <h6>{{ $doctor->availabilityStatus }}</h6>
+                    <br>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Availability</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Book An Appoinetement"/>
-            </div>
         </div>
+        
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/>
+                    <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Book An Appointment"/>
+                    </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
+                    <!-- About Section -->
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>User Id</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Kshiti123</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Kshiti Ghelani</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>kshitighelani@gmail.com</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Phone</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>123 456 7890</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Profession</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Web Developer and Designer</p>
-                                    </div>
-                                </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6"><label>Full Name</label></div>
+                            <div class="col-md-6"><p>{{ $doctor->nom }}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Specialty</label></div>
+                            <div class="col-md-6"><p>{{ $doctor->specialite }}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Phone Number</label></div>
+                            <div class="col-md-6"><p>{{ $doctor->phone }}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Location</label></div>
+                            <div class="col-md-6"><p>{{ $doctor->location }}</p></div>
+                        </div>
                     </div>
+
+                    <!-- Availability Section -->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Experience</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hourly Rate</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>10$/hr</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total Projects</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>230</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>English Level</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Availability</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>6 months</p>
-                                    </div>
-                                </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6"><label>Experience</label></div>
+                            <div class="col-md-6"><p>Expert</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Hourly Rate</label></div>
+                            <div class="col-md-6"><p>$10/hr</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Total Projects</label></div>
+                            <div class="col-md-6"><p>230</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>English Level</label></div>
+                            <div class="col-md-6"><p>Expert</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Availability</label></div>
+                            <div class="col-md-6"><p>6 months</p></div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Your Bio</label><br/>
-                                <p>Your detail description</p>
+                                <p>Your detailed description</p>
                             </div>
                         </div>
                     </div>
@@ -151,12 +106,13 @@
         </div>
     </form>           
 </div>
+
 <footer>
     @include('footer')
 </footer>
 <style>
 body{
-    background: -webkit-linear-gradient(left, #e3e3e3, #ffffff);
+    background: -webkit-linear-gradient(left, #ffffff, #ffffff);
 }
 .emp-profile{
     padding: 3%;
@@ -192,7 +148,7 @@ body{
     color: #333;
 }
 .profile-head h6{
-    color: #0062cc;
+    color: #356f39;
 }
 .profile-edit-btn{
     border: none;
@@ -250,5 +206,31 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+.profile-work .profile-edit-btn {
+    background-color: #f4f4f4; /* Change button color */
+    color: rgb(133, 133, 133); /* Text color */
+    width: 100%; /* Adjust width */
+    padding: 8px 200px; /* Adjust padding */
+    border-radius: 30px; /* Rounded corners */
+    font-size: 16px; /* Adjust text size */
+    text-align: left; /* Align text */
+    padding-left: 15px;
+    margin-top: 10px; /* Adjust margin */
+    transition: 0.3s; /* Smooth transition */
+}
+
+.profile-work .profile-edit-btn:hover {
+    background-color: #004999; /* Darker shade on hover */
+}
+
 </style>
+<script>
+    $(document).ready(function(){
+        $('#profile-tab').on('click', function(){
+            $('html, body').animate({
+                scrollTop: $("#profile").offset().top
+            }, 500);
+        });
+    });
+    </script>
 @endsection

@@ -40,7 +40,6 @@ Route::post('/logout', function() {
     return redirect('/');
 })->name('logout');
 
-<<<<<<< HEAD
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home'); 
@@ -48,10 +47,6 @@ Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
 //////////////////////////////////////////////////
 Route::get('/articles', [ArticlesController::class, 'show'])->name('articles');;
-=======
-// Route for articles
-Route::get('/articles', [ArticlesController::class, 'show'])->name('articles');
->>>>>>> 4cd664ac638722103e91ad353d6c095119734d4c
 Route::get('/articles/{id}', [ArticlesController::class, 'find'])->name('show');
 Route::get('/articles', [ArticlesController::class, 'showArticles'])->name('articles.show');
 
