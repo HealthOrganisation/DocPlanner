@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'login', // Ajoutez une virgule ici
-        'signup' // Pas de virgule après le dernier élément
+        'signup',
+        'contactus' // Pas de virgule après le dernier élément
     ];
 }
