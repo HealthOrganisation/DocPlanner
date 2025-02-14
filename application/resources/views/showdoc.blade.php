@@ -18,15 +18,15 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    {{-- <img src="{{ asset('storage/images/' . $doctor->image) }}" alt="Doctor Image" class="profile-image"> --}}
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                    <img src="{{ asset('storage/' . $doctor->image) }}" alt="Doctor Image" class="profile-image">
+                   
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>{{ $doctor->nom }}</h5>
                     <br>
-                    <h6>{{ $doctor->availabilityStatus }}</h6>
+                    <h6>available</h6>
                     <br>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -44,7 +44,8 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Book An Appointment"/>
+                        <input type="button" class="profile-edit-btn" value="Book An Appointment" onclick="window.location.href='/appointment';"/>
+
                     </div>
                 </div>
             </div>
@@ -52,7 +53,7 @@
                 <div class="tab-content profile-tab" id="myTabContent">
                     <!-- About Section -->
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <br>
+                        
                         <div class="row">
                             <div class="col-md-6"><label>Full Name</label></div>
                             <div class="col-md-6"><p>{{ $doctor->nom }}</p></div>
@@ -73,34 +74,26 @@
 
                     <!-- Availability Section -->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6"><label>Experience</label></div>
-                            <div class="col-md-6"><p>Expert</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6"><label>Hourly Rate</label></div>
-                            <div class="col-md-6"><p>$10/hr</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6"><label>Total Projects</label></div>
-                            <div class="col-md-6"><p>230</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6"><label>English Level</label></div>
-                            <div class="col-md-6"><p>Expert</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6"><label>Availability</label></div>
-                            <div class="col-md-6"><p>6 months</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br/>
-                                <p>Your detailed description</p>
-                            </div>
-                        </div>
+                        @if($doctor->availabilities->isNotEmpty())
+                            @foreach($doctor->availabilities as $availability)
+                                <div class="row">
+                                    <div class="col-md-6"><label>Available Date</label></div>
+                                    <div class="col-md-6"><p>{{ $availability->date }}</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label>Start Time</label></div>
+                                    <div class="col-md-6"><p>{{ $availability->start_time }}</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label>Finish Time</label></div>
+                                    <div class="col-md-6"><p>{{ $availability->end_time }}</p></div>
+                                </div>
+                            @endforeach
+                        @else
+                            <p>No availabilities found.</p>
+                        @endif
                     </div>
+                    
                 </div>
             </div>
         </div>

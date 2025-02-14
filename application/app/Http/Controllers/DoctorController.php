@@ -23,6 +23,7 @@ class DoctorController extends Controller
     {
         // Fetch the doctor by ID
         $doctor = Doctor::where('id_doctor', $id)->firstOrFail();
+        $doctor = Doctor::with('availabilities')->findOrFail($id);
 
         // Return the view with the doctor data
         return view('showdoc', compact('doctor'));

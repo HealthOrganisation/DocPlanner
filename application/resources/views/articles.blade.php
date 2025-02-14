@@ -143,7 +143,7 @@
         <div class="main-article-section">
             <div class="main-article" data-category="{{ $articles->first()->category }}">
                 <a href="{{ route('show', $articles->first()->id) }}">
-                    <img src="{{ asset('images/' . $articles->first()->image) }}" alt="Main Article">
+                    <img src="{{ asset('storage/' . $articles->first()->image) }}" alt="Main Article">
                 </a>
                 <div class="content">
                     <h2><a href="{{ route('show', $articles->first()->id) }}" style="color: white; text-decoration: none;">{{ $articles->first()->title }}</a></h2>
@@ -154,7 +154,7 @@
                 @foreach ($articles->skip(1)->take(2) as $article)
                 <div class="side-article" data-category="{{ $article->category }}">
                     <a href="{{ route('show', $article->id) }}">
-                        <img src="{{ asset('images/' . $article->image) }}" alt="Side Article">
+                        <img src="{{ asset('storage/' . $article->image) }}" alt="Side Article">
                     </a>
                     <div class="content">
                         <h3><a href="{{ route('show', $article->id) }}" style="color: white; text-decoration: none;">{{ $article->title }}</a></h3>
@@ -170,7 +170,7 @@
             @foreach ($articles->skip(3) as $article)
             <div class="small-article" data-category="{{ $article->category }}">
                 <a href="{{ route('show', $article->id) }}">
-                    <img src="{{ asset('images/' . $article->image) }}" alt="Small Article">
+                    <img src="{{ asset('storage/' . $article->image) }}" alt="Small Article">
                 </a>
                 <div class="content">
                     <h4><a href="{{ route('show', $article->id) }}" style="color: white; text-decoration: none;">{{ $article->title }}</a></h4>

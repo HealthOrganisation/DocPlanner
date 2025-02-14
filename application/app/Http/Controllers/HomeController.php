@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
-
+use App\Models\Doctor;
 
 class HomeController extends Controller
 {
@@ -44,7 +44,8 @@ class HomeController extends Controller
 
         // // Pass the data to the view
         // return view('HomePage', compact('currentIndex','images', 'blogs', 'doctors'));
+        $doctors = Doctor::all();
         $articles = Article::latest()->take(4)->get();
-        return view('HomePage', compact('articles'));
+        return view('HomePage', compact('articles', 'doctors'));
     }
 }

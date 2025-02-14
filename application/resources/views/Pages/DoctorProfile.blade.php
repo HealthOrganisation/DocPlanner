@@ -13,10 +13,16 @@
     }
   </style>
 </head>
+<header>
+  @include('header')
+</header>
 <body>
   <div class="profile-container">
     <!-- Sidebar -->
     <aside class="sidebar">
+      <br>
+      <br>
+      <br>
       <div class="profile-header">
         <img  id="profileImage"src="{{ asset('storage/' . $doctor->image) }}" alt="Doctor Image" class="profile-image">
 
@@ -52,6 +58,7 @@
 
     <!-- Main Content -->
     <section class="profile-form">
+      <br>
       <h1><center>Doctor Panel</center></h1>
 
       <!-- Success/Failure Flash Message -->
@@ -79,7 +86,10 @@
       <option {{ $doctor->specialite == 'Cardiologist' ? 'selected' : '' }}>Cardiologist</option>
       <option {{ $doctor->specialite == 'Neurologist' ? 'selected' : '' }}>Neurologist</option>
       <option {{ $doctor->specialite == 'Dermatologist' ? 'selected' : '' }}>Dermatologist</option>
-      <option {{ $doctor->specialite == 'Orthopedic' ? 'selected' : '' }}>Orthopedic</option>
+      <option {{ $doctor->specialite == 'Orthopedic' ? 'selected' : '' }}>Orthopedic Surgeon</option>
+      <option {{ $doctor->specialite == 'Dermatologist' ? 'selected' : '' }}>Pediatrician</option>
+      <option {{ $doctor->specialite == 'Orthopedic' ? 'selected' : '' }}>Oncologist</option>
+    </select>
     </select>
   </div>
   <div class="form-group">
@@ -162,7 +172,9 @@
       </div>
     </section>
   </div>
-
+  <footer>
+    @include('footer')
+</footer>
   <script>
     function showSection(sectionId) {
       // Hide all sections
