@@ -97,7 +97,7 @@ public function login(Request $request)
 
         // Si l'utilisateur est un patient, rediriger vers son profil
         if ($patient) {
-            return redirect()->route('patient.store'); // Redirection vers le profil du patient
+            return redirect()->route('doctor'); // Redirection vers le profil du patient
         }
 
         // Si l'utilisateur n'est ni médecin ni patient, rediriger selon son rôle
