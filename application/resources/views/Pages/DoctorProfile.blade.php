@@ -18,7 +18,8 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="profile-header">
-        <img id="profileImage" src="{{ asset('images/' . $doctor->image) }}" alt="Profile Image" class="profile-image" />
+        <img  id="profileImage" src="{{ asset('storage/' . $doctor->image) }}" alt="Doctor Image" class="profile-image">
+
         <h2 id="fullName">{{ $doctor->nom }}</h2>
         <p id="specialty">{{ $doctor->specialite }}</p>
         <p id="location">{{ $doctor->location }}</p>
@@ -65,7 +66,7 @@
   @method('PUT')
   <div class="form-group">
     <input id="firstName" type="text" name="firstName" value="{{ $doctor->nom }}" placeholder="First Name" />
-    <input id="lastName" type="text" name="lastName" value="{{ $doctor->nom }}" placeholder="Last Name" />
+
   </div>
   <div class="form-group">
     <input id="email" type="email" name="email" value="{{ $doctorEmail }}" placeholder="Email" />
@@ -82,16 +83,19 @@
     </select>
   </div>
   <div class="form-group">
-    <input id="experience" type="text" name="experience" value="{{ $doctor->experience }}" placeholder="Years of Experience" />
+    <input id="experience" type="date" name="date_debut" value="{{ $doctor->date_debut}}" placeholder="Years of Experience" />
   </div>
   <div class="form-group">
-    <input id="address" type="text" name="address" value="{{ $doctor->location }}" placeholder="Address" />
-  </div>
+    <input id="address" type="text" name="location" value="{{ $doctor->location }}" placeholder="Address" />
+</div>
+
   <div class="form-group">
-    <!-- Add file input for image -->
     <label for="image">Profile Image</label>
-    <input type="file" id="image" name="image" />
-  </div>
+    <input type="file" id="image" name="image"/>
+    @if ($doctor->image)
+        <img src="{{ asset('storage/' . $doctor->image) }}" alt="Profile Image" width="100">
+    @endif
+</div>
   <div class="form-actions">
     <button type="button" id="discardChanges">Discard Changes</button>
     <button type="submit" id="saveChanges">Save Changes</button>
@@ -102,16 +106,81 @@
       </div>
 
       <!-- Availability Section -->
-      <div id="availabilitySection" class="hidden">
-        <h3>Availability</h3>
-        <ul>
-          @foreach ($availabilities as $availability)
-            <li>{{ $availability->date }} - {{ $availability->start_time }} to {{ $availability->end_time }}
-                @if ($availability->is_available) (Available) @else (Not Available) @endif
-            </li>
-          @endforeach
-        </ul>
-      </div>
+      <!-- Availability Section -->
+<div id="availabilitySection">
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header"><h3>Doctor Availability Management</h3></div>
+
+        <!-- Add Availability Button -->
+        <button id="addAvailabilityBtn">+ Add Availability</button>
+
+        <!-- Calendar -->
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <div class="arrow" id="prevMonth">&lt;</div>
+                <div id="currentMonthYear"></div>
+                <div class="arrow" id="nextMonth">&gt;</div>
+            </div>
+            <div class="days">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <!-- Saved Availabilities -->
+        <div id="availabilityList">
+            <h3>Saved Availabilities</h3>
+            <ul id="availabilities">
+                @foreach ($availabilities as $availability)
+                    <li>
+                        {{ $availability->date }} - {{ $availability->start_time }} to {{ $availability->end_time }}
+                        @if ($availability->is_available)
+                            (Available)
+                        @else
+                            (Not Available)
+                        @endif
+                        <form method="POST" action="{{ route('availabilities.destroy', $availability) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">🗑️</button>
+                        </form>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+        <!-- Availability Modal -->
+        <div id="availabilityModal" class="modal-overlay" style="display: none;">
+            <div class="modal">
+                <h3>Add Availability</h3>
+                <form method="POST" action="{{ route('availabilities.store') }}">
+                    @csrf
+                    <input type="hidden" name="id_doctor" value="{{ $doctor->id_doctor }}">
+                    <label for="date">Date:</label>
+                    <input type="date" name="date" id="availabilityDate" required />
+                    <label for="startTime">Start Time:</label>
+                    <input type="time" name="start_time" id="availabilityStartTime" required />
+                    <label for="endTime">End Time:</label>
+                    <input type="time" name="end_time" id="availabilityEndTime" required />
+                    <label for="isAvailable">Is Available?</label>
+                    <input type="checkbox" name="is_available" id="isAvailable" checked />
+                    <div class="modal-buttons">
+                        <button type="button" class="btn cancel" id="cancelModal">Cancel</button>
+                        <button type="submit" class="btn save" id="saveAvailability">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
       <!-- Reviews Section -->
       <div id="reviewsSection" class="hidden">
@@ -277,5 +346,6 @@ button:hover {
 .review p {
   margin: 5px 0;
 }
+
 
 </style>

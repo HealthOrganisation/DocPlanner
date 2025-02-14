@@ -137,8 +137,13 @@ public function showProfile()
 
     // Handle image upload if provided
     if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images', 'public');
-        $doctor->image = $imagePath; // Update image path in the database
+        // Delete the old image if exists
+        if ($doctor->image) {
+            Storage::delete('public/' . $doctor->image);
+        }
+        // Store new image
+        $imagePath = $request->file('image')->store('doctor_images', 'public');
+        $doctor->image = $imagePath;
     }
 
     // Save the updated doctor profile to the database
