@@ -11,7 +11,12 @@
           <li><a href="/appointments">Appointments</a></li>
         @else
           <li><a href="/doctor">Doctors</a></li>
-          <li><a href="/my-appointments">My Appointments</a></li>
+          <li>
+          <a href="{{ route('appointments.index') }}" 
+          class="text-blue-600 hover:text-blue-800 transition"> My Appointments </a></li>
+
+          <li><a href="{{ route('editprofilepatient', ['id' => auth()->id()]) }}">My profile</a></li>
+
         @endif
 
         <!-- Logout Link styled like other links -->
@@ -21,6 +26,8 @@
             <a href="#" onclick="this.closest('form').submit();">Logout</a>
           </form>
         </li>
+
+        
 
       @else
       <li><a href="/">Home</a></li>

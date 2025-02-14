@@ -63,4 +63,28 @@ class AppointmentController extends Controller
 
         return response()->json(['message' => 'Appointment booked successfully!', 'appointment' => $appointment]);
     }
+
+
+
+
+    //////////////////////////index
+
+    public function index()
+    {
+        $appointments = Appointment::with('disponibilite')->get(); // Charge les rendez-vous avec leurs disponibilités
+        return view('myappointment', compact('appointments'));
+    }
+    
+    
+
+    public function show($id_user, $id)
+    {
+        $appointment = Appointment::where('id_patient', $id_user)->where('id', $id)->first();
+
+        if (!$appointment) {
+            return response()->json(['message' => 'Rendez-vous non trouvé'], 404);
+        }
+
+        return response()->json($appointment);
+    }
 }

@@ -70,7 +70,6 @@ public function showLoginForm()
         return view('HomePage');
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 public function login(Request $request)
 {
     // Validation des champs requis
@@ -85,17 +84,38 @@ public function login(Request $request)
     if (Auth::attempt($credentials)) {
         $user = Auth::user();
 
-        // Redirection selon le rôle de l'utilisateur
-        if ($user->role === 'doctor') {
-            return redirect()->route('doctor.profile'); // Redirection pour les médecins
-        } elseif ($user->role === 'patient') {
-            return redirect()->route('home'); // Redirection pour les patients
+        // Vérifier d'abord si l'ID de l'utilisateur existe dans la table "doctors"
+        $doctor = \App\Models\Doctor::where('id_user', $user->id)->first();
+
+        // Si l'utilisateur est un médecin, rediriger vers son profil
+        if ($doctor) {
+            return redirect()->route('doctor.profile'); // Redirection vers le profil du médecin
         }
+
+        // Vérifier ensuite si l'ID de l'utilisateur existe dans la table "patients"
+        $patient = \App\Models\Patient::where('id_user', $user->id)->first();
+
+        // Si l'utilisateur est un patient, rediriger vers son profil
+        if ($patient) {
+            return redirect()->route('patient.store'); // Redirection vers le profil du patient
+        }
+
+        // Si l'utilisateur n'est ni médecin ni patient, rediriger selon son rôle
+        if ($user->role === 'doctor') {
+            return redirect()->route('doctor.profile');
+        } elseif ($user->role === 'patient') {
+            return redirect()->route('patient.store');
+        }
+
+        // Si l'utilisateur n'est ni médecin ni patient
+        return redirect()->route('home'); // Redirection vers la page d'accueil si l'utilisateur n'existe dans aucune des deux tables
     }
 
     // Si les identifiants sont incorrects
     return back()->with('error', 'Incorrect Email Or Password');
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
