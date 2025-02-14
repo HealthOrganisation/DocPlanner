@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/doctor/profile', [DoctorController::class, 'showProfile'])->name('doctor.profile');
     Route::resource('availabilities', AvailabilityController::class);
     Route::resource('reviews', ReviewController::class);
+ Route::put('/doctor/profile/update', [DoctorController::class, 'update'])->name('doctor.updateProfile');
 });
 
 // Routes for patient profile and edit

@@ -31,19 +31,23 @@ class DoctorController extends Controller
     }
 public function showProfile()
 {
-    // Fetch the doctor's profile along with reviews and availabilities
-    $doctor = Doctor::with(['reviews', 'availabilities'])->where('id_user', Auth::id())->first();
+    // Fetch the doctor's profile along with reviews, availabilities, and the related user (to access email)
+    $doctor = Doctor::with(['reviews', 'availabilities', 'user'])->where('id_user', Auth::id())->first();
 
     // Check if the doctor exists
     if (!$doctor) {
         return redirect()->route('home')->with('error', 'Doctor profile not found.');
     }
 
-    // Pass the doctor, reviews, and availabilities to the view
+    // Fetch the email from the related user
+    $doctorEmail = $doctor->user->email;
+
+    // Pass the doctor, reviews, availabilities, and email to the view
     return view('Pages.DoctorProfile', [
         'doctor' => $doctor,
         'reviews' => $doctor->reviews,
-        'availabilities' => $doctor->availabilities
+        'availabilities' => $doctor->availabilities,
+        'doctorEmail' => $doctorEmail // Include email in the view
     ]);
 }
 
@@ -51,47 +55,93 @@ public function showProfile()
 
 
     // DoctorController.php
-    public function update(Request $request, User $user, Doctor $doctor)
-    {
-        // Authorization check: Make sure the user is authorized to update this doctor profile
-        if ($user->id !== $doctor->id_user) {
-            abort(403);  // Forbid access if the user doesn't match
-        }
+    // public function update(Request $request, User $user, Doctor $doctor)
+    // {
+    //     // Authorization check: Make sure the user is authorized to update this doctor profile
+    //     if ($user->id !== $doctor->id_user) {
+    //         abort(403);  // Forbid access if the user doesn't match
+    //     }
 
-        // Validate the input data
-        $validatedData = $request->validate([
-            'id_user' => ['required', Rule::exists('users', 'id')],
-            'nom' => 'required|string|max:255',
-            'specialite' => 'required|string',
-            'location' => 'required|string',
-            'phone' => 'required|string',
-            'date_debut' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'availabilityStatus' => 'required|boolean',
-        ]);
+    //     // Validate the input data
+    //     $validatedData = $request->validate([
+    //         'id_user' => ['required', Rule::exists('users', 'id')],
+    //         'nom' => 'required|string|max:255',
+    //         'specialite' => 'required|string',
+    //         'location' => 'required|string',
+    //         'phone' => 'required|string',
+    //         'date_debut' => 'required|date',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //         'availabilityStatus' => 'required|boolean',
+    //     ]);
 
-        // Handle image upload if it exists
-        if ($request->hasFile('image')) {
-            // If the doctor already has an image, delete it
-            if ($doctor->image) {
-                Storage::delete($doctor->image);
-            }
-            // Store the new image
-            $validatedData['image'] = $request->file('image')->store('doctor_images', 'public');
-        } else {
-            // If no new image, keep the old one
-            $validatedData['image'] = $doctor->image;
-        }
+    //     // Handle image upload if it exists
+    //     if ($request->hasFile('image')) {
+    //         // If the doctor already has an image, delete it
+    //         if ($doctor->image) {
+    //             Storage::delete($doctor->image);
+    //         }
+    //         // Store the new image
+    //         $validatedData['image'] = $request->file('image')->store('doctor_images', 'public');
+    //     } else {
+    //         // If no new image, keep the old one
+    //         $validatedData['image'] = $doctor->image;
+    //     }
 
-        // Update the doctor record
-        $doctor->update($validatedData);
+    //     // Update the doctor record
+    //     $doctor->update($validatedData);
 
-        // Redirect to the doctor's profile with a success message
-        return redirect()->route('doctors.show', $doctor)->with('success', 'Doctor updated successfully.');
+    //     // Redirect to the doctor's profile with a success message
+    //     return redirect()->route('doctors.show', $doctor)->with('success', 'Doctor updated successfully.');
+    // }
+
+
+ public function update(Request $request)
+{
+    // Validate the incoming request
+    $request->validate([
+        'firstName' => 'nullable|string|max:255',
+        'specialty' => 'nullable|string|max:255',
+        'location' => 'nullable|string|max:255',
+        'phone' => 'nullable|string|max:15',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image if provided
+    ]);
+
+    // Find the logged-in doctor by their associated user ID
+    $doctor = Doctor::where('id_user', auth()->user()->id)->first();
+
+    if (!$doctor) {
+        return back()->with('error', 'Doctor not found.');
     }
 
+    // Dynamically update the doctor's profile based on the request
+    if ($request->has('firstName')) {
+        $doctor->nom = $request->firstName; // Update first name if provided
+    }
 
+    if ($request->has('specialty')) {
+        $doctor->specialite = $request->specialty; // Update specialty if provided
+    }
 
+    if ($request->has('location')) {
+        $doctor->location = $request->location; // Update location if provided
+    }
+
+    if ($request->has('phone')) {
+        $doctor->phone = $request->phone; // Update phone number if provided
+    }
+
+    // Handle image upload if provided
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+        $doctor->image = $imagePath; // Update image path in the database
+    }
+
+    // Save the updated doctor profile to the database
+    $doctor->save();
+
+    // Redirect back with success message
+    return back()->with('success', 'Your profile has been updated successfully!');
+}
 
 
     public function create()

@@ -7,6 +7,11 @@
 
   <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file here -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div class="profile-container">
@@ -26,62 +31,78 @@
       <!-- Sidebar Navigation -->
       <nav>
         <ul>
-          <li class="nav-item" id="navPersonalInfo">🧑‍💼 Personal Information</li>
+          <li class="nav-item" id="navPersonalInfo" onclick="showSection('personalInfoSection')">🧑‍💼 Personal Information</li>
           <li class="nav-item" id="navCertifications">📜 Certifications & Degrees</li>
-          <li class="nav-item" id="navAvailability">📅 Availability</li>
-          <li class="nav-item" id="navReviews">💬 Patient Reviews</li>
-            <li class="nav-item" id="navLogout">
-      <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-        @method('POST')
-      </form>
-      <button type="submit" onclick="document.getElementById('logoutForm').submit();" style="background: none; border: none; color: #4f9eee; cursor: pointer;">
-        🔐 Log Out
-      </button>
-    </li>
-  </ul>
-</nav>
+          <li class="nav-item" id="navAvailability" onclick="showSection('availabilitySection')">📅 Availability</li>
+          <li class="nav-item" id="navReviews" onclick="showSection('reviewsSection')">💬 Patient Reviews</li>
+          <li class="nav-item" id="navLogout">
+            <!-- Logout Form -->
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+              @method('POST')
+            </form>
+            <button type="submit" onclick="document.getElementById('logoutForm').submit();" style="background: none; border: none; color: #4f9eee; cursor: pointer;">
+              🔐 Log Out
+            </button>
+          </li>
+        </ul>
+      </nav>
     </aside>
 
     <!-- Main Content -->
     <section class="profile-form">
       <h1><center>Doctor Panel</center></h1>
 
-      <!-- Personal Information Form -->
-      <form id="personalInfoForm">
-        <div class="form-group">
-          <input id="firstName" type="text" value="{{ $doctor->nom }}" placeholder="First Name" />
-          <input id="lastName" type="text" value="{{ $doctor->nom }}" placeholder="Last Name" />
-        </div>
-        <div class="form-group">
-          <input id="email" type="email" value="{{ $doctor->email }}" placeholder="Email" />
-          <span class="verified">Verified</span>
-        </div>
-        <div class="form-group">
-          <input id="phone" type="text" value="{{ $doctor->phone }}" placeholder="Phone Number" />
-          <select id="specialtySelect">
-            <option disabled value="">Specialty</option>
-            <option {{ $doctor->specialite == 'Cardiologist' ? 'selected' : '' }}>Cardiologist</option>
-            <option {{ $doctor->specialite == 'Neurologist' ? 'selected' : '' }}>Neurologist</option>
-            <option {{ $doctor->specialite == 'Dermatologist' ? 'selected' : '' }}>Dermatologist</option>
-            <option {{ $doctor->specialite == 'Orthopedic' ? 'selected' : '' }}>Orthopedic</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <input id="experience" type="text" value="{{ $doctor->experience }}" placeholder="Years of Experience" />
-        </div>
+      <!-- Success/Failure Flash Message -->
+      @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+      @endif
 
-        <div class="form-group">
-          <input id="address" type="text" value="{{ $doctor->location }}" placeholder="Address" />
-        </div>
-        <div class="form-actions">
-          <button type="button" id="discardChanges">Discard Changes</button>
-          <button type="submit" id="saveChanges">Save Changes</button>
-        </div>
-      </form>
+      <!-- Personal Information Form Section -->
+      <div id="personalInfoSection" class="hidden">
+        <form id="personalInfoForm" action="{{ route('doctor.updateProfile') }}" method="POST" enctype="multipart/form-data">
+  @csrf
+  @method('PUT')
+  <div class="form-group">
+    <input id="firstName" type="text" name="firstName" value="{{ $doctor->nom }}" placeholder="First Name" />
+    <input id="lastName" type="text" name="lastName" value="{{ $doctor->nom }}" placeholder="Last Name" />
+  </div>
+  <div class="form-group">
+    <input id="email" type="email" name="email" value="{{ $doctorEmail }}" placeholder="Email" />
+    <span class="verified">Verified</span>
+  </div>
+  <div class="form-group">
+    <input id="phone" type="text" name="phone" value="{{ $doctor->phone }}" placeholder="Phone Number" />
+    <select id="specialtySelect" name="specialty">
+      <option disabled value="">Specialty</option>
+      <option {{ $doctor->specialite == 'Cardiologist' ? 'selected' : '' }}>Cardiologist</option>
+      <option {{ $doctor->specialite == 'Neurologist' ? 'selected' : '' }}>Neurologist</option>
+      <option {{ $doctor->specialite == 'Dermatologist' ? 'selected' : '' }}>Dermatologist</option>
+      <option {{ $doctor->specialite == 'Orthopedic' ? 'selected' : '' }}>Orthopedic</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input id="experience" type="text" name="experience" value="{{ $doctor->experience }}" placeholder="Years of Experience" />
+  </div>
+  <div class="form-group">
+    <input id="address" type="text" name="address" value="{{ $doctor->location }}" placeholder="Address" />
+  </div>
+  <div class="form-group">
+    <!-- Add file input for image -->
+    <label for="image">Profile Image</label>
+    <input type="file" id="image" name="image" />
+  </div>
+  <div class="form-actions">
+    <button type="button" id="discardChanges">Discard Changes</button>
+    <button type="submit" id="saveChanges">Save Changes</button>
+  </div>
+</form>
+
+
+      </div>
 
       <!-- Availability Section -->
-      <div id="availabilitySection">
+      <div id="availabilitySection" class="hidden">
         <h3>Availability</h3>
         <ul>
           @foreach ($availabilities as $availability)
@@ -93,7 +114,7 @@
       </div>
 
       <!-- Reviews Section -->
-      <div id="reviewsSection">
+      <div id="reviewsSection" class="hidden">
         <h3>Patient Reviews</h3>
         @foreach ($reviews as $review)
           <div class="review">
@@ -103,12 +124,27 @@
           </div>
         @endforeach
       </div>
-
     </section>
   </div>
 
   <script>
-    // Your JS code for handling photo editing, certification, and availability sections
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.profile-form > div');
+      sections.forEach(function(section) {
+        section.classList.add('hidden');
+      });
+
+      // Show the selected section
+      const sectionToShow = document.getElementById(sectionId);
+      if (sectionToShow) {
+        sectionToShow.classList.remove('hidden');
+      }
+    }
+       window.onload = function() {
+      showSection('personalInfoSection');
+    }
+
   </script>
 </body>
 </html>
