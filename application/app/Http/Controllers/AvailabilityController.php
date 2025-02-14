@@ -35,7 +35,7 @@ class AvailabilityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_doc' => 'required|exists:doctors,id_doctor',
+            'id_doctor' => 'required|exists:doctors,id_doctor',
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
@@ -56,7 +56,7 @@ class AvailabilityController extends Controller
     public function update(Request $request, Availability $availability)
     {
         $request->validate([
-            'id_doc' => 'required|exists:doctors,id_doctor',
+            'id_doctor' => 'required|exists:doctors,id_doctor',
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
