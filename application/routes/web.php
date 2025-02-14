@@ -33,25 +33,22 @@ Route::post('/signup', [UserController::class, 'store'])->name('user.store');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 ////////////////////
 Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
-Route::get('/doctor/{id}', [DoctorController::class, 'showw'])->name('doctor.showw');
+//Route::get('/doctor/{id}', [DoctorController::class, 'showw'])->name('doctor.showw');
 ///////////////////////////////
 Route::post('/logout', function() {
     Auth::logout();
     return redirect('/');
 })->name('logout');
 
-<<<<<<< HEAD
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home'); 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
 //////////////////////////////////////////////////
 Route::get('/articles', [ArticlesController::class, 'show'])->name('articles');;
-=======
 // Route for articles
-Route::get('/articles', [ArticlesController::class, 'show'])->name('articles');
->>>>>>> 4cd664ac638722103e91ad353d6c095119734d4c
+
 Route::get('/articles/{id}', [ArticlesController::class, 'find'])->name('show');
 Route::get('/articles', [ArticlesController::class, 'showArticles'])->name('articles.show');
 
@@ -59,12 +56,16 @@ Route::get('/articles', [ArticlesController::class, 'showArticles'])->name('arti
 Route::get('/contactus', [ContactusController::class, 'show'])->name('contactus.show');
 Route::post('/contactus', [ContactusController::class, 'store'])->name('contactus.store');
 
-// Route to view Doctor profile
+
 Route::middleware('auth')->group(function () {
+    // The doctor profile route
     Route::get('/doctor/profile', [DoctorController::class, 'showProfile'])->name('doctor.profile');
+
+    // Other doctor-related routes
+    Route::put('/doctor/profile/update', [DoctorController::class, 'update'])->name('doctors.update');
     Route::resource('availabilities', AvailabilityController::class);
+    Route::delete('/availabilities/delete', [AvailabilityController::class, 'destroy'])->name('availabilities.destroy');
     Route::resource('reviews', ReviewController::class);
- Route::put('/doctor/profile/update', [DoctorController::class, 'update'])->name('doctor.updateProfile');
 });
 
 // Routes for patient profile and edit
@@ -97,6 +98,8 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+
+/*
 // Add the route for login redirection based on user roles
 Route::middleware('auth')->get('/home', function () {
     $user = Auth::user();
@@ -111,5 +114,5 @@ Route::middleware('auth')->get('/home', function () {
         return redirect()->route('home');  // Default to home if no specific role
     }
 })->name('home.redirect');
-
+*/
 // You can also add other protected routes that might be role-specific here.

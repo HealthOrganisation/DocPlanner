@@ -35,17 +35,26 @@ class AvailabilityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_doctor' => 'required|exists:doctors,id_doctor',
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
             'is_available' => 'required|boolean',
         ]);
 
-        Availability::create($request->all());
+        // Automatically associate with logged-in doctor
+        $doctor = auth()->user()->doctor;
 
-        return redirect()->route('availabilities.index')->with('success', 'Availability created successfully.');
+        Availability::create([
+            'id_doctor' => $doctor->id_doctor,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'is_available' => $request->is_available
+        ]);
+
+        return redirect()->back()->with('success', 'Availability added successfully.');
     }
+
 
     public function edit(Availability $availability)
     {
@@ -72,6 +81,6 @@ class AvailabilityController extends Controller
     {
         $availability->delete();
 
-        return redirect()->route('availabilities.index')->with('success', 'Availability deleted successfully.');
+        return redirect()->route('availabilities')->with('success', 'Availability deleted successfully.');
     }
 }
