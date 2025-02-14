@@ -18,7 +18,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="profile-header">
-        <img  id="profileImage" src="{{ asset('storage/' . $doctor->image) }}" alt="Doctor Image" class="profile-image">
+        <img  id="profileImage"src="{{ asset('storage/' . $doctor->image) }}" alt="Doctor Image" class="profile-image">
 
         <h2 id="fullName">{{ $doctor->nom }}</h2>
         <p id="specialty">{{ $doctor->specialite }}</p>
@@ -61,7 +61,7 @@
 
       <!-- Personal Information Form Section -->
       <div id="personalInfoSection" class="hidden">
-        <form id="personalInfoForm" action="{{ route('doctor.updateProfile') }}" method="POST" enctype="multipart/form-data">
+        <form id="personalInfoForm" action="{{ route('doctors.update') }}" method="POST" enctype="multipart/form-data">
   @csrf
   @method('PUT')
   <div class="form-group">
@@ -105,82 +105,49 @@
 
       </div>
 
-      <!-- Availability Section -->
-      <!-- Availability Section -->
-<div id="availabilitySection">
-    <div class="main-container">
-        <!-- Header -->
-        <div class="header"><h3>Doctor Availability Management</h3></div>
+     <!-- Availability Section -->
+<div id="availabilitySection" class="hidden">
+    <h3>Manage Availability</h3>
 
-        <!-- Add Availability Button -->
-        <button id="addAvailabilityBtn">+ Add Availability</button>
-
-        <!-- Calendar -->
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <div class="arrow" id="prevMonth">&lt;</div>
-                <div id="currentMonthYear"></div>
-                <div class="arrow" id="nextMonth">&gt;</div>
+    <!-- Add Availability Form -->
+    <div class="availability-form">
+        <form action="{{ route('availabilities.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <input type="date" name="date" required>
+                <input type="time" name="start_time" required>
+                <input type="time" name="end_time" required>
+                <select name="is_available" required>
+                    <option value="1">Available</option>
+                    <option value="0">Not Available</option>
+                </select>
+                <!-- Hidden doctor ID field -->
+                <input type="hidden" name="id_doctor" value="{{ $doctor->id_doctor }}">
             </div>
-            <div class="days">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-            </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
-        </div>
+            <button type="submit" class="btn-add">Add Availability</button>
+        </form>
+    </div>
 
-        <!-- Saved Availabilities -->
-        <div id="availabilityList">
-            <h3>Saved Availabilities</h3>
-            <ul id="availabilities">
-                @foreach ($availabilities as $availability)
-                    <li>
-                        {{ $availability->date }} - {{ $availability->start_time }} to {{ $availability->end_time }}
-                        @if ($availability->is_available)
-                            (Available)
-                        @else
-                            (Not Available)
-                        @endif
-                        <form method="POST" action="{{ route('availabilities.destroy', $availability) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">🗑️</button>
-                        </form>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-
-        <!-- Availability Modal -->
-        <div id="availabilityModal" class="modal-overlay" style="display: none;">
-            <div class="modal">
-                <h3>Add Availability</h3>
-                <form method="POST" action="{{ route('availabilities.store') }}">
+    <!-- Availability List -->
+    <div class="availability-list">
+        <h4>Current Availabilities</h4>
+        @foreach ($availabilities as $availability)
+            <div class="availability-item">
+                <span>
+                    {{ $availability->date }} -
+                    {{ \Carbon\Carbon::parse($availability->start_time)->format('h:i A') }} to
+                    {{ \Carbon\Carbon::parse($availability->end_time)->format('h:i A') }}
+                    ({{ $availability->is_available ? 'Available' : 'Not Available' }})
+                </span>
+                <form action="{{ route('availabilities.destroy', $availability->id_availability) }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id_doctor" value="{{ $doctor->id_doctor }}">
-                    <label for="date">Date:</label>
-                    <input type="date" name="date" id="availabilityDate" required />
-                    <label for="startTime">Start Time:</label>
-                    <input type="time" name="start_time" id="availabilityStartTime" required />
-                    <label for="endTime">End Time:</label>
-                    <input type="time" name="end_time" id="availabilityEndTime" required />
-                    <label for="isAvailable">Is Available?</label>
-                    <input type="checkbox" name="is_available" id="isAvailable" checked />
-                    <div class="modal-buttons">
-                        <button type="button" class="btn cancel" id="cancelModal">Cancel</button>
-                        <button type="submit" class="btn save" id="saveAvailability">Save</button>
-                    </div>
+                    @method('DELETE')
+                    <button type="submit" class="btn-delete">Delete</button>
                 </form>
             </div>
-        </div>
+        @endforeach
     </div>
 </div>
-
 
       <!-- Reviews Section -->
       <div id="reviewsSection" class="hidden">
@@ -345,6 +312,54 @@ button:hover {
 
 .review p {
   margin: 5px 0;
+}
+
+/* Availability Section Styles */
+.availability-form {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.availability-form .form-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-add {
+    background: #4CAF50;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.availability-list {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.availability-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.availability-item:last-child {
+    border-bottom: none;
+}
+
+.btn-delete {
+    background: #f44336;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }
 
 

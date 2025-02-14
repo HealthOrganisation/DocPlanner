@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Doctor; 
+
+use App\Models\Doctor;
 use App\Models\User;
 use App\Models\Availability;
 use App\Models\Review;
@@ -16,12 +17,7 @@ class DoctorController extends Controller
     {
         $this->middleware('auth');
     }
-    public function doctor()
-    {
-        $doctors = Doctor::all();
-        return view('doctor', compact('doctors'));
-    }
-    
+
     public function index()
     {
         $doctors = Doctor::paginate(15);
@@ -33,28 +29,32 @@ class DoctorController extends Controller
         $doctor->load('reviews', 'availabilities');
         return view('doctors.show', compact('doctor'));
     }
-   
-public function showProfile()
-{
-    // Fetch the doctor's profile along with reviews, availabilities, and the related user (to access email)
-    $doctor = Doctor::with(['reviews', 'availabilities', 'user'])->where('id_user', Auth::id())->first();
+    public function showProfile()
+    {
+        // Get or create doctor profile
+        $doctor = Doctor::firstOrCreate(
+            ['id_user' => Auth::id()],
+            [
+                'nom' => 'Dr. ' . Auth::user()->name,
+                'specialite' => 'General Practice',
+                'location' => 'Not specified',
+                'phone' => '000-000-0000',
+                'date_debut' => now(),
+                'image' => null,
+                'availabilityStatus' => true // Add a default value for availabilityStatus
+            ]
+        );
 
-    // Check if the doctor exists
-    if (!$doctor) {
-        return redirect()->route('home')->with('error', 'Doctor profile not found.');
+        // Load relationships
+        $doctor->load(['reviews', 'availabilities', 'user']);
+
+        return view('Pages.DoctorProfile', [
+            'doctor' => $doctor,
+            'reviews' => $doctor->reviews,
+            'availabilities' => $doctor->availabilities,
+            'doctorEmail' => $doctor->user->email
+        ]);
     }
-
-    // Fetch the email from the related user
-    $doctorEmail = $doctor->user->email;
-
-    // Pass the doctor, reviews, availabilities, and email to the view
-    return view('Pages.DoctorProfile', [
-        'doctor' => $doctor,
-        'reviews' => $doctor->reviews,
-        'availabilities' => $doctor->availabilities,
-        'doctorEmail' => $doctorEmail // Include email in the view
-    ]);
-}
 
 
 
@@ -137,13 +137,8 @@ public function showProfile()
 
     // Handle image upload if provided
     if ($request->hasFile('image')) {
-        // Delete the old image if exists
-        if ($doctor->image) {
-            Storage::delete('public/' . $doctor->image);
-        }
-        // Store new image
-        $imagePath = $request->file('image')->store('doctor_images', 'public');
-        $doctor->image = $imagePath;
+        $imagePath = $request->file('image')->store('images', 'public');
+        $doctor->image = $imagePath; // Update image path in the database
     }
 
     // Save the updated doctor profile to the database
@@ -201,13 +196,4 @@ public function showProfile()
 
         return redirect()->route('doctors.index')->with('success', 'Doctor deleted successfully.');
     }
-    public function showw($id)
-{
-    // Fetch the doctor by ID
-    $doctor = Doctor::where('id_doctor', $id)->firstOrFail();
-
-    // Return the view with the doctor data
-    return view('showdoc', compact('doctor'));
-}
-
 }
