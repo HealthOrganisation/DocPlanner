@@ -73,7 +73,10 @@ Route::middleware('auth')->group(function () {
     Route::get('patient/profile', [PatientController::class, 'showProfile'])->name('patients.profile');
     Route::get('patient/profile/edit', [PatientController::class, 'editProfile'])->name('patients.editProfile');
     Route::put('/patient/profile/update', [PatientController::class, 'updateProfile'])->name('patients.updateProfile');
-
+    
+    Route::get('/appointment', function () {
+        return view('appointments'); // Cette vue affichera le design
+    });
 });
 
 // Admin routes (Admin Dashboard, User Management, etc.)

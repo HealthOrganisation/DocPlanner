@@ -29,27 +29,32 @@ class DoctorController extends Controller
         $doctor->load('reviews', 'availabilities');
         return view('doctors.show', compact('doctor'));
     }
-public function showProfile()
-{
-    // Fetch the doctor's profile along with reviews, availabilities, and the related user (to access email)
-    $doctor = Doctor::with(['reviews', 'availabilities', 'user'])->where('id_user', Auth::id())->first();
+    public function showProfile()
+    {
+        // Get or create doctor profile
+        $doctor = Doctor::firstOrCreate(
+            ['id_user' => Auth::id()],
+            [
+                'nom' => 'Dr. ' . Auth::user()->name,
+                'specialite' => 'General Practice',
+                'location' => 'Not specified',
+                'phone' => '000-000-0000',
+                'date_debut' => now(),
+                'image' => null,
+                'availabilityStatus' => true // Add a default value for availabilityStatus
+            ]
+        );
 
-    // Check if the doctor exists
-    if (!$doctor) {
-        return redirect()->route('home')->with('error', 'Doctor profile not found.');
+        // Load relationships
+        $doctor->load(['reviews', 'availabilities', 'user']);
+
+        return view('Pages.DoctorProfile', [
+            'doctor' => $doctor,
+            'reviews' => $doctor->reviews,
+            'availabilities' => $doctor->availabilities,
+            'doctorEmail' => $doctor->user->email
+        ]);
     }
-
-    // Fetch the email from the related user
-    $doctorEmail = $doctor->user->email;
-
-    // Pass the doctor, reviews, availabilities, and email to the view
-    return view('Pages.DoctorProfile', [
-        'doctor' => $doctor,
-        'reviews' => $doctor->reviews,
-        'availabilities' => $doctor->availabilities,
-        'doctorEmail' => $doctorEmail // Include email in the view
-    ]);
-}
 
 
 
