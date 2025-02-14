@@ -29,6 +29,26 @@ class DoctorController extends Controller
         $doctor->load('reviews', 'availabilities');
         return view('doctors.show', compact('doctor'));
     }
+public function showProfile()
+{
+    // Fetch the doctor's profile along with reviews and availabilities
+    $doctor = Doctor::with(['reviews', 'availabilities'])->where('id_user', Auth::id())->first();
+
+    // Check if the doctor exists
+    if (!$doctor) {
+        return redirect()->route('home')->with('error', 'Doctor profile not found.');
+    }
+
+    // Pass the doctor, reviews, and availabilities to the view
+    return view('Pages.DoctorProfile', [
+        'doctor' => $doctor,
+        'reviews' => $doctor->reviews,
+        'availabilities' => $doctor->availabilities
+    ]);
+}
+
+
+
 
     // DoctorController.php
     public function update(Request $request, User $user, Doctor $doctor)
