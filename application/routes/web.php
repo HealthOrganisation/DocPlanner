@@ -93,18 +93,18 @@ Route::prefix('admin')->group(function () {
 });
 
 // Add the route for login redirection based on user roles
-Route::middleware('auth')->get('/home', function () {
-    $user = Auth::user();
+// Route::middleware('auth')->get('/home', function () {
+//     $user = Auth::user();
 
-    if ($user->hasRole('doctor')) {
-        return redirect()->route('doctor.profile');  // Redirect to doctor profile if role is doctor
-    } elseif ($user->hasRole('patient')) {
-        return redirect()->route('patients.profile');  // Redirect to patient profile if role is patient
-    } elseif ($user->hasRole('admin')) {
-        return redirect()->route('admin.dashboard');  // Redirect to admin dashboard if role is admin
-    } else {
-        return redirect()->route('home');  // Default to home if no specific role
-    }
-})->name('home.redirect');
+//     if ($user->hasRole('doctor')) {
+//         return redirect()->route('doctor.profile');  // Redirect to doctor profile if role is doctor
+//     } elseif ($user->hasRole('patient')) {
+//         return redirect()->route('patients.profile');  // Redirect to patient profile if role is patient
+//     } elseif ($user->hasRole('admin')) {
+//         return redirect()->route('admin.dashboard');  // Redirect to admin dashboard if role is admin
+//     } else {
+//         return redirect()->route('home');  // Default to home if no specific role
+//     }
+// })->name('home.redirect');
 
 // You can also add other protected routes that might be role-specific here.
