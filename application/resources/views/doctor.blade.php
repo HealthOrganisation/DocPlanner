@@ -225,43 +225,18 @@ body {
                 <button onclick="filterDoctors('Oncologist')">Oncologist</button>
             </div>
             <div class="doctor-container">
-                <div class="doctor-card" data-specialty="Cardiologist">
-                    <img src="images/prof.jpg" alt="Doctor 1">
-                    <h3>Dr. Sarah Johnson</h3>
-                    <p>Cardiologist</p>
-                    <a href="#" class="profile-btn">View Profile</a>
+                @foreach($doctors as $doctor)
+                <div class="doctor-card" data-specialty="{{ $doctor->specialite }}">
+                    <img src="{{ asset('storage/images/' . $doctor->image) }}" alt="Doctor Image">
+                    <h3>{{ $doctor->nom }}</h3>
+                    <p>{{ $doctor->specialite }}</p>
+                    <a href="{{ route('doctor.show', $doctor->id_doctor) }}" class="profile-btn">View Profile</a>
                 </div>
-                <div class="doctor-card" data-specialty="Dermatologist">
-                    <img src="images/prof.jpg" alt="Doctor 2">
-                    <h3>Dr. James Smith</h3>
-                    <p>Dermatologist</p>
-                    <a href="#" class="profile-btn">View Profile</a>
-                </div>
-                <div class="doctor-card" data-specialty="Neurologist">
-                    <img src="images/prof.jpg" alt="Doctor 3">
-                    <h3>Dr. Emily Brown</h3>
-                    <p>Neurologist</p>
-                    <a href="#" class="profile-btn">View Profile</a>
-                </div>
-                <div class="doctor-card" data-specialty="Orthopedic Surgeon">
-                    <img src="images/prof.jpg" alt="Doctor 4">
-                    <h3>Dr. Michael Lee</h3>
-                    <p>Orthopedic Surgeon</p>
-                    <a href="#" class="profile-btn">View Profile</a>
-                </div>
-                <div class="doctor-card" data-specialty="Pediatrician">
-                    <img src="images/prof.jpg" alt="Doctor 5">
-                    <h3>Dr. Anna White</h3>
-                    <p>Pediatrician</p>
-                    <a href="#" class="profile-btn">View Profile</a>
-                </div>
-                <div class="doctor-card" data-specialty="Oncologist">
-                    <img src="images/prof.jpg" alt="Doctor 6">
-                    <h3>Dr. Robert Green</h3>
-                    <p>Oncologist</p>
-                    <a href="#" class="profile-btn">View Profile</a>
-                </div>
+                @endforeach
             </div>
+            
+            
+            
         </div>
     </div>
     <footer>

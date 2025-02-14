@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Doctor; 
 
 use App\Models\Doctor;
 use App\Models\User;
@@ -20,6 +21,10 @@ class DoctorController extends Controller
 
     public function index()
     {
+<<<<<<< HEAD
+        $doctors = Doctor::all();
+        return view('doctor', compact('doctors'));
+=======
         $doctors = Doctor::paginate(15);
         return view('doctors.index', compact('doctors'));
     }
@@ -190,5 +195,15 @@ public function showProfile()
         $doctor->delete();
 
         return redirect()->route('doctors.index')->with('success', 'Doctor deleted successfully.');
+>>>>>>> 4cd664ac638722103e91ad353d6c095119734d4c
     }
+    public function show($id)
+{
+    // Fetch the doctor by ID
+    $doctor = Doctor::where('id_doctor', $id)->firstOrFail();
+
+    // Return the view with the doctor data
+    return view('showdoc', compact('doctor'));
+}
+
 }
