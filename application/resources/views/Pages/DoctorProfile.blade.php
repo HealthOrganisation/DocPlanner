@@ -30,9 +30,17 @@
           <li class="nav-item" id="navCertifications">📜 Certifications & Degrees</li>
           <li class="nav-item" id="navAvailability">📅 Availability</li>
           <li class="nav-item" id="navReviews">💬 Patient Reviews</li>
-          <li class="nav-item" id="navLogout">🔐 Log Out</li>
-        </ul>
-      </nav>
+            <li class="nav-item" id="navLogout">
+      <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+        @method('POST')
+      </form>
+      <button type="submit" onclick="document.getElementById('logoutForm').submit();" style="background: none; border: none; color: #4f9eee; cursor: pointer;">
+        🔐 Log Out
+      </button>
+    </li>
+  </ul>
+</nav>
     </aside>
 
     <!-- Main Content -->
