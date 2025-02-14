@@ -10,7 +10,7 @@ class ArticlesController extends Controller
     public function show()
     {
         $category = $request->query('category');
-    
+
     if ($category && $category != 'all') {
         $articles = Article::where('category', $category)->get();
     } else {

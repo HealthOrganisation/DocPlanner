@@ -7,7 +7,7 @@
     <ul class="nav-links">
       @if(Auth::check())
         @if(Auth::user()->role == 'doctor')
-          <li><a href="/doctor">Doctor Dashboard</a></li>
+        <li><a href="/doctor/profile">Doctor Dashboard</a></li>
           <li><a href="/appointments">Appointments</a></li>
         @else
           <li><a href="/doctor">Doctors</a></li>
@@ -39,7 +39,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const header = document.getElementById("header");
-    
+
     window.addEventListener("scroll", function() {
       if (window.scrollY > 50) {
         header.classList.add("scrolled");
@@ -61,11 +61,11 @@
     transition: background-color 0.3s ease;
     z-index: 1000; /* Keeps the header on top */
   }
-  
+
   header.scrolled {
     background-color: lightgrey;
   }
-  
+
   /* Navbar Styling */
   .navbar {
     width: 100%;
@@ -78,27 +78,27 @@
     position: relative;
     z-index: 10;
   }
-  
+
   /* Logo Styling */
   .logo {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  
+
   .logo-image {
     width: 50px;
     height: 50px;
     object-fit: cover;
   }
-  
+
   .logo-textt {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
     font-family: 'Arial', sans-serif;
   }
-  
+
   /* Navigation Links Styling */
   .nav-links {
     list-style: none;
@@ -107,11 +107,11 @@
     margin: 0; /* Ensure no extra margin around nav-links */
     padding: 0;
   }
-  
+
   .nav-links li {
     display: inline-block;
   }
-  
+
   .nav-links li a {
     text-decoration: none;
     color: #333;
@@ -121,9 +121,8 @@
     display: block;
     padding: 15px 10px; /* Ensure clickable area is larger */
   }
-  
+
   .nav-links li a:hover {
     color: #d4af37;
   }
   </style>
-  
