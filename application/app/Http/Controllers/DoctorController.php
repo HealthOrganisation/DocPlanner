@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Models\Doctor; 
-
-use App\Models\Doctor;
 use App\Models\User;
 use App\Models\Availability;
 use App\Models\Review;
@@ -18,13 +16,14 @@ class DoctorController extends Controller
     {
         $this->middleware('auth');
     }
-
-    public function index()
+    public function doctor()
     {
-<<<<<<< HEAD
         $doctors = Doctor::all();
         return view('doctor', compact('doctors'));
-=======
+    }
+    
+    public function index()
+    {
         $doctors = Doctor::paginate(15);
         return view('doctors.index', compact('doctors'));
     }
@@ -34,6 +33,7 @@ class DoctorController extends Controller
         $doctor->load('reviews', 'availabilities');
         return view('doctors.show', compact('doctor'));
     }
+   
 public function showProfile()
 {
     // Fetch the doctor's profile along with reviews, availabilities, and the related user (to access email)
@@ -195,9 +195,8 @@ public function showProfile()
         $doctor->delete();
 
         return redirect()->route('doctors.index')->with('success', 'Doctor deleted successfully.');
->>>>>>> 4cd664ac638722103e91ad353d6c095119734d4c
     }
-    public function show($id)
+    public function showw($id)
 {
     // Fetch the doctor by ID
     $doctor = Doctor::where('id_doctor', $id)->firstOrFail();

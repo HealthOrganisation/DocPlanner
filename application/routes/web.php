@@ -30,6 +30,11 @@ Route::get('/forgotpassword', function () {
 
 Route::post('/login', [UserController::class, 'login'])->name('login.store');
 Route::post('/signup', [UserController::class, 'store'])->name('user.store');
+Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
+////////////////////
+Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
+Route::get('/doctor/{id}', [DoctorController::class, 'showw'])->name('doctor.showw');
+///////////////////////////////
 Route::post('/logout', function() {
     Auth::logout();
     return redirect('/');

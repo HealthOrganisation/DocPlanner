@@ -230,7 +230,7 @@ body {
                     <img src="{{ asset('storage/images/' . $doctor->image) }}" alt="Doctor Image">
                     <h3>{{ $doctor->nom }}</h3>
                     <p>{{ $doctor->specialite }}</p>
-                    <a href="{{ route('doctor.show', $doctor->id_doctor) }}" class="profile-btn">View Profile</a>
+                    <a href="{{ route('doctor.showw', $doctor->id_doctor) }}" class="profile-btn">View Profile</a>
                 </div>
                 @endforeach
             </div>
