@@ -32,8 +32,8 @@ Route::post('/login', [UserController::class, 'login'])->name('login.store');
 Route::post('/signup', [UserController::class, 'store'])->name('user.store');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 ////////////////////
-Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
-//Route::get('/doctor/{id}', [DoctorController::class, 'showw'])->name('doctor.showw');
+Route::get('/doctors', [DoctorController::class, 'doctor'])->name('doctors');
+Route::get('/doctors/{id}', [DoctorController::class, 'showw'])->name('doctors.showw');
 ///////////////////////////////
 Route::post('/logout', function() {
     Auth::logout();
@@ -47,11 +47,8 @@ Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/doctor', [DoctorController::class, 'doctor'])->name('doctor');
 //////////////////////////////////////////////////
 Route::get('/articles', [ArticlesController::class, 'show'])->name('articles');;
-<<<<<<< HEAD
-=======
 // Route for articles
 
->>>>>>> 6210553f6c8ffa0c93538f1ed28b990a66c0ffae
 Route::get('/articles/{id}', [ArticlesController::class, 'find'])->name('show');
 Route::get('/articles', [ArticlesController::class, 'showArticles'])->name('articles.show');
 
@@ -110,19 +107,6 @@ Route::prefix('admin')->group(function () {
 // Route::middleware('auth')->get('/home', function () {
 //     $user = Auth::user();
 
-<<<<<<< HEAD
-//     if ($user->hasRole('doctor')) {
-//         return redirect()->route('doctor.profile');  // Redirect to doctor profile if role is doctor
-//     } elseif ($user->hasRole('patient')) {
-//         return redirect()->route('patients.profile');  // Redirect to patient profile if role is patient
-//     } elseif ($user->hasRole('admin')) {
-//         return redirect()->route('admin.dashboard');  // Redirect to admin dashboard if role is admin
-//     } else {
-//         return redirect()->route('home');  // Default to home if no specific role
-//     }
-// })->name('home.redirect');
-
-=======
     if ($user->hasRole('doctor')) {
         return redirect()->route('doctor.profile');  // Redirect to doctor profile if role is doctor
     } elseif ($user->hasRole('patient')) {
@@ -134,5 +118,4 @@ Route::prefix('admin')->group(function () {
     }
 })->name('home.redirect');
 */
->>>>>>> 6210553f6c8ffa0c93538f1ed28b990a66c0ffae
 // You can also add other protected routes that might be role-specific here.
