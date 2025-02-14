@@ -10,6 +10,7 @@ class Doctor extends Model
     use HasFactory;
 
     protected $primaryKey = 'id_doctor';
+    protected $table = 'doctors';
 
     protected $fillable = [
         'id_user',
