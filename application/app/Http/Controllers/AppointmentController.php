@@ -79,7 +79,7 @@ class AppointmentController extends Controller
     public function index2()
     {
         $appointments = Appointment::with('disponibilite')->get(); // Charge les rendez-vous avec leurs disponibilités
-        return view('appointments', compact('appointments'));
+        return view('appointments_doc', compact('appointments'));
     }
 
     public function show($id_user, $id)
