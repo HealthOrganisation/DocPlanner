@@ -40,7 +40,7 @@ public function store(Request $request)
 public function index(){
 
     $user = User::all();
-    return responce()->json($user);
+    return response()->json($user);
 
 }
 
@@ -124,11 +124,11 @@ public function login(Request $request)
         $user = User::find($id);
 
         if(!$user){
-            return responce()->json(['message '=>' user introuvable'],404);
+            return response()->json(['message '=>' user introuvable'],404);
         }
 
         $user->delete();
-            return responce()->json(['message' => 'user delete avec succe']);
+            return response()->json(['message' => 'user delete avec succe']);
     }
     public function logout(Request $request)
     {

@@ -45,10 +45,15 @@
     transition: background-color 0.3s;
 }
 
-.filter-bar ul li:hover, .filter-bar ul li.active {
-    background-color: #3579c3;
-    color: #fff;
+.filter-bar ul li:hover {
+    background-color: #ddd; /* Grey on hover */
 }
+
+.filter-bar ul li.active {
+    background-color: #3579c3; /* Blue for active item */
+    color: white;
+}
+
 
 
         .container {
@@ -122,129 +127,89 @@
         @include('header')
     </header>
     <div class="filter-bar">
-        <ul>
-            <li class="active">All</li>
-            <li>Technology</li>
-            <li>Health</li>
-            <li>Travel</li>
-            <li>Business</li>
-            <li>Entertainment</li>
-            <!-- Add more categories as needed -->
+        <ul id="filter-categories">
+            <li class="{{ request('category') == 'all' ? 'active' : '' }}" data-category="all">All</li>
+            <li class="{{ request('category') == 'Surgery' ? 'active' : '' }}" data-category="Surgery">Surgery</li>
+            <li class="{{ request('category') == 'Technology' ? 'active' : '' }}" data-category="Technology">Technology</li>
+            <li class="{{ request('category') == 'Neurology' ? 'active' : '' }}" data-category="Neurology">Neurology</li>
+            <li class="{{ request('category') == 'Pharmaceuticals' ? 'active' : '' }}" data-category="Pharmaceuticals">Pharmaceuticals</li>
+            <li class="{{ request('category') == 'Cancer' ? 'active' : '' }}" data-category="Cancer">Cancer</li>
         </ul>
+        
     </div>
     <div class="container">
         <!-- Main Article Section -->
+        @if ($articles->count() > 0)
         <div class="main-article-section">
-            <div class="main-article">
-                <img src="images/5.jpg" alt="Main Article">
+            <div class="main-article" data-category="{{ $articles->first()->category }}">
+                <a href="{{ route('show', $articles->first()->id) }}">
+                    <img src="{{ asset('storage/' . $articles->first()->image) }}" alt="Main Article">
+                </a>
                 <div class="content">
-                    <h2>Big Article Title</h2>
-                    <p>Summary or excerpt of the big article...</p>
+                    <h2><a href="{{ route('show', $articles->first()->id) }}" style="color: white; text-decoration: none;">{{ $articles->first()->title }}</a></h2>
+                    <p>{{ Str::limit($articles->first()->content, 100) }}</p>
                 </div>
             </div>
             <div class="side-articles">
-                <div class="side-article">
-                    <img src="images/5.jpg" alt="Side Article 1">
+                @foreach ($articles->skip(1)->take(2) as $article)
+                <div class="side-article" data-category="{{ $article->category }}">
+                    <a href="{{ route('show', $article->id) }}">
+                        <img src="{{ asset('storage/' . $article->image) }}" alt="Side Article">
+                    </a>
                     <div class="content">
-                        <h3>Small Article Title 1</h3>
-                        <p>Summary of the small article...</p>
+                        <h3><a href="{{ route('show', $article->id) }}" style="color: white; text-decoration: none;">{{ $article->title }}</a></h3>
+                        <p>{{ Str::limit($article->content, 80) }}</p>
                     </div>
                 </div>
-                <div class="side-article">
-                    <img src="images/5.jpg" alt="Side Article 2">
-                    <div class="content">
-                        <h3>Small Article Title 2</h3>
-                        <p>Summary of the small article...</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        
+    
         <!-- Small Articles Section -->
         <div class="small-articles-section">
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 1">
+            @foreach ($articles->skip(3) as $article)
+            <div class="small-article" data-category="{{ $article->category }}">
+                <a href="{{ route('show', $article->id) }}">
+                    <img src="{{ asset('storage/' . $article->image) }}" alt="Small Article">
+                </a>
                 <div class="content">
-                    <h4>Small Article Title 3</h4>
-                    <p>Summary of the small article...</p>
+                    <h4><a href="{{ route('show', $article->id) }}" style="color: white; text-decoration: none;">{{ $article->title }}</a></h4>
+                    <p>{{ Str::limit($article->content, 50) }}</p>
                 </div>
             </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 2">
-                <div class="content">
-                    <h4>Small Article Title 4</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 3">
-                <div class="content">
-                    <h4>Small Article Title 5</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 2">
-                <div class="content">
-                    <h4>Small Article Title 4</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 3">
-                <div class="content">
-                    <h4>Small Article Title 5</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 2">
-                <div class="content">
-                    <h4>Small Article Title 4</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 3">
-                <div class="content">
-                    <h4>Small Article Title 5</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 2">
-                <div class="content">
-                    <h4>Small Article Title 4</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 3">
-                <div class="content">
-                    <h4>Small Article Title 5</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 2">
-                <div class="content">
-                    <h4>Small Article Title 4</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <div class="small-article">
-                <img src="images/5.jpg" alt="Small Article 3">
-                <div class="content">
-                    <h4>Small Article Title 5</h4>
-                    <p>Summary of the small article...</p>
-                </div>
-            </div>
-            <!-- Add more small articles as needed -->
-        </div>
+            @endforeach
+        </div>        
+        @else
+        <p>No articles found.</p>
+        @endif
     </div>
+    
 
     <footer>
         @include('footer')
     </footer>
+    <script>
+    document.querySelectorAll('.filter-bar ul li').forEach(function(item) {
+    // Check if the current filter matches the selected category in the URL
+    let category = item.getAttribute('data-category');
+    if (window.location.search.includes('category=' + category)) {
+        item.classList.add('active'); // Add active class if category matches
+    }
+
+    item.addEventListener('click', function() {
+        // Remove 'active' class from all items
+        document.querySelectorAll('.filter-bar ul li').forEach(function(li) {
+            li.classList.remove('active');
+        });
+
+        // Add active class to the clicked filter item
+        this.classList.add('active');
+
+        // Redirect to filtered articles
+        window.location.href = '/articles?category=' + category;
+    });
+});
+
+    </script>
 </body>
 </html>

@@ -361,189 +361,77 @@
     <h2 style="text-align: center; font-size: 2rem; position: relative; padding-bottom: 10px;">Our Latest Blogs
         <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: #d4af37;"></span>
     </h2>
+
     <div class="blogs-content" style="display: flex; justify-content: space-between;">
-        <div class="big-blog" style="flex: 0 0 65%; padding-right: 90px;margin-top: 30px;">
-            <div class="blog-card" style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                <img src="{{ asset('images/health.jpg') }}" alt="Big Blog" style="width: 90%; border-radius: 10px;">
-                <h3 style="font-size: 1.8rem; margin-top: 20px;">Blog Title One</h3>
-                <p style="font-size: 1.1rem; color: #555;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan arcu, et tempor lorem. Sed ut nunc at neque facilisis tincidunt.</p>
-            </div>
-        </div>
-        <div class="small-blogs" style="flex: 0 0 40%; display: flex; flex-direction: column; gap: 25px; margin-top: 30px; margin-left:-44px;"> <!-- Add margin-top here -->
-            <div class="blog-card" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: flex; align-items: center;">
-                <img src="{{ asset('images/health.jpg') }}" alt="Small Blog" style="width: 120px; height: 100px; border-radius: 10px; object-fit: cover; margin-right: 15px;">
-                <div>
-                    <h4 style="font-size: 1.4rem; margin: 0;">Blog Title Two</h4>
-                    <p style="font-size: 1rem; color: #555; margin-top: 5px;">A short description of the blog goes here to summarize the content.</p>
-                </div>
-            </div>
-            <div class="blog-card" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: flex; align-items: center;">
-                <img src="{{ asset('images/health.jpg') }}" alt="Small Blog" style="width: 120px; height: 100px; border-radius: 10px; object-fit: cover; margin-right: 15px;">
-                <div>
-                    <h4 style="font-size: 1.4rem; margin: 0;">Blog Title Three</h4>
-                    <p style="font-size: 1rem; color: #555; margin-top: 5px;">This is another small blog with a brief description to entice the reader.</p>
-                </div>
-            </div>
-            <div class="blog-card" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: flex; align-items: center;">
-                <img src="{{ asset('images/health.jpg') }}" alt="Small Blog" style="width: 120px; height: 100px; border-radius: 10px; object-fit: cover; margin-right: 15px;">
-                <div>
-                    <h4 style="font-size: 1.4rem; margin: 0;">Blog Title Three</h4>
-                    <p style="font-size: 1rem; color: #555; margin-top: 5px;">This is another small blog with a brief description to entice the reader.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="text-center" style="margin-top: 1px;">
-        <button class="btn btn-primary" style="background-color: #3579c3; border-color: #3579c3; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 70px; margin-right: 12cm; margin-top: -10px;" 
-        onclick="window.location.href='/articles';">Read All Blogs</button>
-    </div>
-    
-</div>
-<div class="doctors-section" style="padding: 50px 10%; background-color: #fdf6e3;">
-    <h2 style="text-align: center; font-size: 2rem; position: relative; padding-bottom: 10px;">Meet Our Professional Doctors
-        <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: #d4af37;border-radius: 1em;"></span>
-    </h2>
-    <div id="doctorCarousel" class="carousel slide" data-bs-ride="false"> <!-- Remove the auto-slide by setting data-bs-ride="false" -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row">
-                    <!-- Doctor 1 -->
-                    <div class="col-md-4">
-                        <div class="doctor-card">
-                            <img src="{{ asset('images/prof.jpg') }}" class="d-block w-100" alt="Doctor 1">
-                            <div class="doctor-info">
-                                <h4>Dr. John Doe</h4>
-                                <p>Speciality: Cardiologist</p>
-                                <div class="rating">
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                </div>
-                                <div class="social-links">
-                                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                                    <a href="mailto:doctor1@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Doctor 2 -->
-                    <div class="col-md-4">
-                        <div class="doctor-card">
-                            <img src="{{ asset('images/prof.jpg') }}" class="d-block w-100" alt="Doctor 2">
-                            <div class="doctor-info">
-                                <h4>Dr. Jane Smith</h4>
-                                <p>Speciality: Dermatologist</p>
-                                <div class="rating">
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                </div>
-                                <div class="social-links">
-                                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                                    <a href="mailto:doctor2@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Doctor 3 -->
-                    <div class="col-md-4">
-                        <div class="doctor-card">
-                            <img src="{{ asset('images/prof.jpg') }}" class="d-block w-100" alt="Doctor 3">
-                            <div class="doctor-info">
-                                <h4>Dr. Emily Brown</h4>
-                                <p>Speciality: Neurologist</p>
-                                <div class="rating">
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                </div>
-                                <div class="social-links">
-                                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                                    <a href="mailto:doctor3@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        @if($articles->isNotEmpty())
+            <!-- Big Blog (Latest Article) -->
+            <div class="big-blog" style="flex: 0 0 65%; padding-right: 90px;margin-top: 30px;">
+                <div class="blog-card" style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <img src="{{ asset('storage/'.$articles->first()->image) }}" alt="Big Blog" style="width: 90%; border-radius: 10px;">
+                    <h3 style="font-size: 1.8rem; margin-top: 20px;">{{ Str::limit($articles->first()->title, 20, '...') }}</h3>
+                    <p style="font-size: 1.1rem; color: #555;">{{ Str::limit($articles->first()->content, 20, '...') }}</p>
                 </div>
             </div>
 
-            <!-- Next 3 Doctors -->
-            <div class="carousel-item">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="doctor-card">
-                            <img src="{{ asset('images/prof.jpg') }}" class="d-block w-100" alt="Doctor 4">
-                            <div class="doctor-info">
-                                <h4>Dr. Anna Green</h4>
-                                <p>Speciality: Surgeon</p>
-                                <div class="rating">
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                </div>
-                                <div class="social-links">
-                                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                                    <a href="mailto:doctor4@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
+            <!-- Small Blogs (Next 3 Articles) -->
+            <div class="small-blogs" style="flex: 0 0 40%; display: flex; flex-direction: column; gap: 25px; margin-top: 30px; margin-left:-44px;">
+                @foreach($articles->skip(1) as $article)
+                    <div class="blog-card" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: flex; align-items: center;">
+                        <img src="{{ asset('storage/'.$article->image) }}" alt="Small Blog" style="width: 120px; height: 100px; border-radius: 10px; object-fit: cover; margin-right: 15px;">
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin: 0;">{{ Str::limit($article->title, 10, '...') }}</h4>
+                            <p style="font-size: 1rem; color: #555; margin-top: 5px;">{{ Str::limit($article->content, 10, '...') }}</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="doctor-card">
-                            <img src="{{ asset('images/prof.jpg') }}" class="d-block w-100" alt="Doctor 5">
-                            <div class="doctor-info">
-                                <h4>Dr. Michael Taylor</h4>
-                                <p>Speciality: Pediatrician</p>
-                                <div class="rating">
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                </div>
-                                <div class="social-links">
-                                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                                    <a href="mailto:doctor5@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                @endforeach
+            </div>
+        @else
+            <p style="text-align: center; font-size: 1.2rem;">No blogs available at the moment.</p>
+        @endif
+    </div>
+
+    <div class="text-center" style="margin-top: 20px;">
+        <button class="btn btn-primary" style="background-color: #3579c3; border-color: #3579c3; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 70px;" 
+        onclick="window.location.href='/articles';">Read All Blogs</button>
+    </div>
+</div>
+
+
+<div class="doctors-section" style="padding: 50px 10%; background-color: #fdf6e3;">
+    <h2 style="text-align: center; font-size: 2rem; position: relative; padding-bottom: 10px;">
+        Meet Our Professional Doctors
+        <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: #d4af37;border-radius: 1em;"></span>
+    </h2>
+    
+    <div id="doctorCarousel" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+            @foreach($doctors->chunk(3) as $doctorChunk)
+                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                    <div class="row">
+                        @foreach($doctorChunk as $doctor)
+                            <div class="col-md-4">
+                                <div class="doctor-card">
+                                    <img src="{{ asset('storage/' . $doctor->image) }}" class="d-block w-100" alt="{{ $doctor->name }}">
+                                    <div class="doctor-info">
+                                        <h4>{{ $doctor->nom }}</h4>
+                                        <p>Speciality: {{ $doctor->specialite }}</p>
+                                        <div class="rating">
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <span class="star">&#9733;</span>
+                                            @endfor
+                                        </div>
+                                        <div class="social-links">
+                                            <a href="{{ $doctor->linkedin }}" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                                            <a href="{{ $doctor->facebook }}" class="social-icon"><i class="fab fa-facebook"></i></a>
+                                            <a href="mailto:{{ $doctor->email }}" class="social-icon"><i class="fas fa-envelope"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="doctor-card">
-                            <img src="{{ asset('images/prof.jpg') }}" class="d-block w-100" alt="Doctor 6">
-                            <div class="doctor-info">
-                                <h4>Dr. Lisa White</h4>
-                                <p>Speciality: Ophthalmologist</p>
-                                <div class="rating">
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                    <span class="star">&#9733;</span>
-                                </div>
-                                <div class="social-links">
-                                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                                    <a href="mailto:doctor6@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#doctorCarousel" data-bs-slide="prev">
@@ -556,6 +444,7 @@
         </button>
     </div>
 </div>
+
 <br><br>
 <footer>
     @include('footer')

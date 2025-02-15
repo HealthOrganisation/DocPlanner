@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
 class Doctor extends Model
 {
     use HasFactory;
 
     protected $primaryKey = 'id_doctor';
+    protected $table = 'doctors';
 
     protected $fillable = [
         'id_user',
@@ -29,7 +30,7 @@ class Doctor extends Model
 
     public function availabilities()
     {
-        return $this->hasMany(Availability::class, 'id_doc');
+        return $this->hasMany(Availability::class, 'id_doctor');
     }
 
     public function reviews()
@@ -45,5 +46,9 @@ class Doctor extends Model
     public function appointments()
     {
         return $this->hasMany(Appointment::class, 'id_doctor');
+    }
+
+    public function patients() {
+        return $this->belongsToMany(Patient::class);
     }
 }
