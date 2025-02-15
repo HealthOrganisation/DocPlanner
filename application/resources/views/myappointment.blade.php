@@ -9,11 +9,11 @@
 <body class="min-h-screen bg-gray-100">
 
     <!-- Header -->
-    <header class="bg-blue-600 text-white p-6">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Mes Rendez-vous</h1>
-        </div>
+    <header>
+        @include('header')
     </header>
+
+    <br><br><br>
 
     <!-- Liste des Rendez-vous -->
     <div class="max-w-5xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
@@ -22,24 +22,32 @@
         <!-- Table des rendez-vous -->
         <table class="w-full border-collapse border border-gray-200">
             <thead class="bg-blue-500 text-white">
-                <tr>
-                    <th class="p-3 text-left">ID</th>
+            <tr>
                     <th class="p-3 text-left">Date</th>
-                    <th class="p-3 text-left">Téléphone</th>
+                    <th class="p-3 text-left">Phone</th>
                     <th class="p-3 text-left">Email</th>
+                    <th class="p-3 text-left">Doctor</th> <!-- New Column -->
                 </tr>
             </thead>
             <tbody>
-    @foreach($appointments as $appointment)
-        <tr>
-            <td class="p-3">{{ $appointment->id }}</td> <!-- Affichage de l'ID -->
-            <td class="p-3">{{ $appointment->availability->date }}</td> <!-- Affichage de la date de disponibilité -->
-            <td class="p-3">{{ $appointment->phone }}</td> <!-- Affichage du téléphone -->
-            <td class="p-3">{{ $appointment->email }}</td> <!-- Affichage de l'email -->
-        </tr>
-    @endforeach
-</tbody>
-
+                @foreach($appointments as $appointment)
+                    <tr>
+                        <td class="p-3">{{ optional($appointment->disponibilite)->date }}</td>
+                        <td class="p-3">{{ $appointment->phone }}</td>
+                        <td class="p-3">{{ $appointment->email }}</td>
+                        <td class="p-3">
+                            @if(optional($appointment->disponibilite)->doctor)
+                                <a href="{{ route('doctors.showw', $appointment->disponibilite->doctor->id_doctor) }}" 
+                                   class="text-blue-600 underline">
+                                    Dr. {{ $appointment->disponibilite->doctor->nom }}
+                                </a>
+                            @else
+                                <span class="text-gray-500">Non assigné</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 

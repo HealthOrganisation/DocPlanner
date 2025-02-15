@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
-use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -154,4 +153,15 @@ class PatientController extends Controller
     {
         return view('editprofilepatient');
     }
+
+
+    public function showw($id)
+    {
+        // Assurez-vous que l'attribut de la clé primaire est correct
+        $patient = Patient::findOrFail($id); // Utilisez findOrFail si la clé primaire est "id"
+    
+        // Retourner la vue avec les données du patient
+        return view('showPat', compact('patient'));
+    }
+    
 } 

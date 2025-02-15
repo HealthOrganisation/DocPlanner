@@ -38,4 +38,9 @@ class Patient extends Model
     {
         return $this->hasMany(Appointment::class, 'id_patient');
     }
+
+    public function availabilities()
+    {
+        return $this->hasMany(Availability::class);
+    }
 }

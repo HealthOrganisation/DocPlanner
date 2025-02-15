@@ -102,6 +102,40 @@ Route::prefix('admin')->group(function () {
 });
 
 
+Route::middleware('auth')->group(function () {
+    Route::get('/editprofilepatient', [PatientController::class, 'showProfile'])->name('patient.profile');
+});
+
+Route::get('/tablBord', function () {
+    return view('tablBord'); // Cette vue affichera le design
+});
+
+Route::get('/PatientProfile', function () {
+    return view('PatientProfile'); // Cette vue affichera le design
+});
+
+Route::post('/PatientProfile', [PatientController::class, 'store'])->name('patient.store');
+
+Route::put('/editprofilepatient', [PatientController::class, 'update'])->name('patient.update');
+
+Route::get('/editprofilepatient/{id_patient}', [PatientController::class, 'edit'])->name('editprofilepatient');
+
+Route::get('/editprofilepatient/{id}', [PatientController::class, 'show'])->name('patient.show');
+
+Route::get('/PatientProfile', [PatientController::class, 'create'])->name('patient.create');
+
+Route::get('/editprofilepatient/{id}', [PatientController::class, 'edit'])->name('editprofilepatient');
+Route::get('/patients/{id}', [PatientController::class, 'showw'])->name('patients.showw');
+
+
+Route::get('/myappointment', [AppointmentController::class, 'index'])->name('appointments.index');
+Route::get('/appointments', [AppointmentController::class, 'index2'])->name('appointments.index2');
+
+Route::get('/myappointment/{id}', [AppointmentController::class, 'show']);
+
+Route::get('/appointments/{id_doctor}', [AppointmentController::class, 'showByDoctor'])
+    ->name('appointments.byDoctor');
+
 /*
 // Add the route for login redirection based on user roles
 // Route::middleware('auth')->get('/home', function () {

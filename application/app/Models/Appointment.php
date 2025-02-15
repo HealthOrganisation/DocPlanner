@@ -27,8 +27,15 @@ class Appointment extends Model
         return $this->belongsTo(Patient::class, 'id_patient');
     }
 
-    public function availability()
+    public function disponibilite()
     {
         return $this->belongsTo(Availability::class, 'id_dispo');
     }
+    
+    // app/Models/Patient.php
+public function appointments()
+{
+    return $this->hasMany(Appointment::class, 'id_patient'); // Utiliser le bon nom de colonne pour la clé étrangère
+}
+
 }

@@ -8,7 +8,8 @@
       @if(Auth::check())
         @if(Auth::user()->role == 'doctor')
         <li><a href="/doctor/profile">Doctor Dashboard</a></li>
-          <li><a href="/appointments">Appointments</a></li>
+          <li> <a href="{{ route('appointments.index2') }}" 
+          class="text-blue-600 hover:text-blue-800 transition"> Appointments</a></li>
         @else
           <li><a href="/doctor">Doctors</a></li>
           <li>

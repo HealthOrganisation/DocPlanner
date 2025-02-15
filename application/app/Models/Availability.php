@@ -23,4 +23,9 @@ class Availability extends Model
     {
         return $this->belongsTo(Doctor::class, 'id_doctor');
     }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

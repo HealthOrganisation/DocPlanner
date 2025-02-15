@@ -75,7 +75,12 @@ class AppointmentController extends Controller
         return view('myappointment', compact('appointments'));
     }
     
-    
+
+    public function index2()
+    {
+        $appointments = Appointment::with('disponibilite')->get(); // Charge les rendez-vous avec leurs disponibilités
+        return view('appointments', compact('appointments'));
+    }
 
     public function show($id_user, $id)
     {
@@ -87,4 +92,23 @@ class AppointmentController extends Controller
 
         return response()->json($appointment);
     }
+
+
+     // Show appointments by doctor ID
+     public function showByDoctor($id_doctor)
+     {
+         $appointments = Appointment::whereHas('availability', function ($query) use ($id_doctor) {
+             $query->where('id_doctor', $id_doctor);
+         })->get();
+ 
+         return view('appointments.byDoctor', compact('appointments'));
+     }
+
+     
+     // Show appointments by patient ID
+     public function showByPatient($id_patient)
+     {
+         $appointments = Appointment::where('id_patient', $id_patient)->get();
+         return view('appointments.byPatient', compact('appointments'));
+     }
 }
