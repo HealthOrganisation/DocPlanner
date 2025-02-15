@@ -14,12 +14,13 @@
                 <h2 class="text-2xl font-bold">Admin Panel</h2>
             </div>
             <nav class="mt-6">
-                <a href="{{ route('admin.dashboard') }}" class="block py-2 px-4 hover:bg-blue-700">Dashboard</a>
-                <a href="{{ route('admin.doctors.index') }}" class="block py-2 px-4 hover:bg-blue-700">Doctors</a>
-                <a href="{{ route('admin.users.index') }}" class="block py-2 px-4 hover:bg-blue-700">Users</a>
-                <a href="{{ route('admin.patients.index') }}" class="block py-2 px-4 hover:bg-blue-700">Patients</a>
-                <a href="{{ route('admin.contactus.index') }}" class="block py-2 px-4 hover:bg-blue-700">Contact Messages</a>
-                <a href="{{ route('admin.admins.index') }}" class="block py-2 px-4 hover:bg-blue-700">Admins</a>
+                <a href="{{ route('admin.dashboard') }}" class="block py-2 px-4 hover:bg-gray-700">Dashboard</a>
+                <a href="{{ route('admin.doctors.index') }}" class="block py-2 px-4 hover:bg-gray-700">Doctors</a>
+                <a href="{{ route('admin.users.index') }}" class="block py-2 px-4 hover:bg-gray-700">Users</a>
+                <a href="{{ route('admin.patients.index') }}" class="block py-2 px-4 hover:bg-gray-700">Patients</a>
+                <a href="{{ route('admin.contactus.index') }}" class="block py-2 px-4 hover:bg-gray-700">Contact Messages</a>
+                <a href="{{ route('admin.admins.index') }}" class="block py-2 px-4 hover:bg-gray-700">Admins</a>
+                <a href="{{ route('admin.articles.create') }}" class="block py-2 px-4 hover:bg-gray-700">Add Article</a>
             </nav>
         </div>
 

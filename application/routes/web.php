@@ -73,20 +73,29 @@ Route::middleware('auth')->group(function () {
     Route::get('patient/profile', [PatientController::class, 'showProfile'])->name('patients.profile');
     Route::get('patient/profile/edit', [PatientController::class, 'editProfile'])->name('patients.editProfile');
     Route::put('/patient/profile/update', [PatientController::class, 'updateProfile'])->name('patients.updateProfile');
-    
+
     Route::get('/appointment', function () {
         return view('appointments'); // Cette vue affichera le design
     });
 });
 
+
+// Show login form
+Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+
+// Handle login form submission
+Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
+
+// Admin dashboard (protected by auth:admin middleware)
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth:admin');
 // Admin routes (Admin Dashboard, User Management, etc.)
 Route::prefix('admin')->group(function () {
-    Route::get('/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login', [AdminController::class, 'login'])->name('admin.login.store');
+ //   Route::get('/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+  //  Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::middleware('admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+      //  Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/doctors', [AdminController::class, 'doctors'])->name('admin.doctors.index');
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
         Route::delete('/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
@@ -96,8 +105,14 @@ Route::prefix('admin')->group(function () {
         Route::delete('/contactus/{id}', [AdminController::class, 'destroyContact'])->name('admin.contactus.destroy');
         Route::get('/admins', [AdminController::class, 'admins'])->name('admin.admins.index');
         Route::get('/admins/create', [AdminController::class, 'createAdminForm'])->name('admin.admins.create');
-        Route::post('/admins', [AdminController::class, 'storeAdmin'])->name('admin.admins.store');
+
+        Route::post('/store', [AdminController::class, 'storeAdmin'])->name('admin.store');
         Route::delete('/admins/{id}', [AdminController::class, 'destroyAdmin'])->name('admin.admins.destroy');
+
+        // Add Article
+Route::get('/articles/create', [ArticlesController::class, 'create'])->name('admin.articles.create');
+Route::post('/articles/store', [ArticlesController::class, 'store']) ->name('admin.articles.store')->middleware('auth:admin');
+Route::delete('/articles/{id}', [ArticlesController::class, 'destroy'])->name('admin.articles.destroy');
     });
 });
 
