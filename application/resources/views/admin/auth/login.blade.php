@@ -9,7 +9,19 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
-        <form action="{{ route('admin.login') }}" method="POST">
+
+        <!-- Display validation errors -->
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('admin.login.submit') }}" method="POST">
             @csrf
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
